@@ -14,7 +14,6 @@ enum TaskState {UNRESOLVED, SUCCESS, FAILURE}
 const TASK_TIMER_DURATION = 5.0
 
 ## Maps the teacher's dialogue to possible player responses.
-## Maps the teacher's dialogue to possible player responses.
 const dialog_to_response: Dictionary[String, Array] = {
 	"Hello, thank you for joining the call. Can you tell me about your previous work experience?": ["My last job was... interesting.", "I'm a quick learner.", "I've been working with cats."],
 	"Interesting. How do you handle stressful situations?": ["I stay calm under pressure.", "I take a deep breath.", "I just purr and it all works out."],
@@ -24,12 +23,9 @@ const dialog_to_response: Dictionary[String, Array] = {
 	"Okay, I'll be right back again. Don't go anywhere.": ["Sounds good.", "Okay.", "I'll be here."], # Interruption 2
 	"I'm back again. One more question.": ["Ready when you are.", "Just a little more.", "I'm still here."],
 	
-	# --- START OF FIX ---
-	# Add a new question and a third interruption here.
 	"Tell me about a time you worked on a team.": ["I'm a great collaborator.", "I prefer to lead.", "My cat was the project manager."],
 	"Fascinating. One moment, my dog is barking. Be right back.": ["No problem.", "I understand.", "I'll wait."], # Interruption 3
 	"Alright, sorry about that. Now, for my final question.": ["I'm ready.", "Let's finish this.", "Was it a big dog?"],
-	# --- END OF FIX ---
 
 	"Okay, that's everything for now. We'll be in touch!": ["Thank you!", "Goodbye!", "Looking forward to it!"]
 }
@@ -44,9 +40,6 @@ var game_cycle = 0
 var task_state = TaskState.UNRESOLVED
 const MAX_CYCLES = 3
 
-# A signal to indicate when the room view tasks are done, with a result.
-signal room_tasks_completed
-
 func display_next_dialog()->void:
 	if cur_dialog_id >= len(dialog_list):
 		print("no more dialog!")
@@ -59,89 +52,67 @@ func display_next_dialog()->void:
 	dialog_bubble.set_dialog(current_dialog, responses)
 	
 	cur_dialog_id += 1
-	#
-	#if current_dialog.contains("right back"):
-		## Hide the buttons for the cutscene
-		#if dialog_bubble:
-			#dialog_bubble.but1.visible = false
-			#dialog_bubble.but2.visible = false
-			#dialog_bubble.but3.visible = false
-		#
-		##await get_tree().create_timer(1.5).timeout
-		##
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Hide the room view initially
+	Global.play_music("normal")
+	
 	room_view.visible = false
 	turn_around.visible = false
 	room_view.room_tasks_completed.connect(_on_room_tasks_completed)
 	display_next_dialog()
 
 func _on_leave_call_button_down() -> void:
+	# Stop the normal music for suspense. This is the only pause.
+	Global.stop_music()
 	hochberg.play("gone")
 	
-	# Teacher leaves, show the turn around button.
-	# We also need to hide the dialogue bubble.
 	if dialog_bubble:
 		dialog_bubble.visible = false
 	turn_around.visible = true
 	room_view_button_ready = true
 	task_state = TaskState.UNRESOLVED
 	
-	# The timer and event now start as soon as the teacher leaves.
 	room_view.start_next_event()
-	##room_view.set_task_time_limit(15.0)
 	get_tree().create_timer(TASK_TIMER_DURATION).timeout.connect(_on_task_timer_timeout)
 	
 
 func _on_turn_around_button_down() -> void:
 	if room_view_button_ready:
 		if room_view.visible:
-			# Player is in room view, so turn back to interview
+			# Player is turning back to the interview, play normal music.
+			Global.play_music("normal")
 			print("Turning from Room View to Computer View")
 			room_view.visible = false
 			computer_view.visible = true
 			
-			# Check if the professor is back, then continue the dialogue
 			if hochberg_is_back:
 				print("Professor is back, continuing dialogue.")
 				hochberg.play("default")
 				
-				# --- START OF FIX ---
-				# This logic is moved from _on_task_timer_timeout to prevent
-				# calling that function and incrementing the game cycle twice.
 				if task_state == TaskState.SUCCESS:
-					print("Task was a success, displaying next dialogue.")
 					display_next_dialog()
 				else:
-					print("Task failed, displaying failure dialogue.")
 					dialog_bubble.visible = true
 					dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
 					dialog_bubble.but1.visible = true
 					dialog_bubble.but2.visible = true
 					dialog_bubble.but3.visible = true
-				# --- END OF FIX ---
 				
 				hochberg_is_back = false
 			
 		else:
-			# Player is in interview view, so turn to room
+			# Player is turning to the room, play the ruckus music.
+			Global.play_music("fixing")
 			print("Turning from Computer View to Room View")
 			room_view.visible = true
 			computer_view.visible = false
-			
-			## When the player turns around, they need to see the cat.
-			#if room_view:
-				#room_view.show_cat_event()
 				
 		turn_around.visible = true
 
 
 func _on_room_tasks_completed(success: bool):
 	print("TASK COMPLETED")
-	# Update score and state, but do NOT change the view
 	if success:
 		score += 10
 		task_state = TaskState.SUCCESS
@@ -154,28 +125,22 @@ func _on_room_tasks_completed(success: bool):
 func _on_task_timer_timeout():
 	print("Timer ran out, professor is back!")
 	
-	# The professor is back, regardless of the view
 	hochberg.play("default")
 	
-	# Check if the game cycle is over
 	game_cycle += 1
 	if game_cycle >= MAX_CYCLES:
 		end_game()
 	else:
 		if computer_view.visible:
-			# If the player is on the computer view, the dialogue appears automatically
 			if task_state == TaskState.SUCCESS:
-				print("Task was a success, displaying next dialogue.")
 				display_next_dialog()
 			else:
-				print("Task failed, displaying failure dialogue.")
 				dialog_bubble.visible = true
 				dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
 				dialog_bubble.but1.visible = true
 				dialog_bubble.but2.visible = true
 				dialog_bubble.but3.visible = true
 		else:
-			# Player is still in the room, show "ahem!" to prompt a manual return
 			print("Player is in room view, displaying Ahem!")
 			dialog_bubble.visible = true
 			dialog_bubble.set_dialog("Ahem!", [])
@@ -185,7 +150,6 @@ func end_game():
 	if dialog_bubble:
 		dialog_bubble.visible = true
 		dialog_bubble.set_dialog("The interview is over. Your final score is: " + str(score), [])
-		# Explicitly disable the buttons so they cannot be clicked
 		dialog_bubble.but1.disabled = true
 		dialog_bubble.but2.disabled = true
 		dialog_bubble.but3.disabled = true
@@ -215,5 +179,6 @@ func _on_option_1_button_down() -> void:
 	if dialog_list[cur_dialog_id-1].contains("right back"):
 		_on_leave_call_button_down()
 		return
+		
 	print("option 1")
 	display_next_dialog()

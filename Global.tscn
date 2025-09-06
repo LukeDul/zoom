@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2qvx1xcr1lwn"]
+[gd_scene load_steps=2 format=3 uid="uid://ccn4d4apwvp36"]
 
 [ext_resource type="Script" uid="uid://d15aa55msvmaf" path="res://global.gd" id="1_4mbhf"]
 
@@ -7,3 +7,5 @@ script = ExtResource("1_4mbhf")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 max_polyphony = 2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

@@ -44,7 +44,7 @@ var is_holding_cat: bool = false:
 		$IdleCat.visible = !v
 		is_holding_cat = v
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_holding_cat == true:
 		$HeldCat.global_position = get_global_mouse_position()
 		
@@ -104,7 +104,7 @@ func end_curtain_event()->void:
 
 func _on_window_cat_button_down() -> void:
 	print("you grabbed the cat")
-	Global.stop()
+	Global.stop() # Stops the "tear" sfx, but the music continues.
 	task_completed = true
 	cat_state = CatStates.IDLE
 	is_holding_cat = true 
@@ -132,6 +132,7 @@ func end_outlet_event()->void:
 
 func _on_outlet_cat_button_down() -> void:
 	print("you grabbed the cat")
+	# Ruckus music continues to play.
 	task_completed = true
 	cat_state = CatStates.IDLE
 	is_holding_cat = true
@@ -156,6 +157,7 @@ func end_washing_machine_event()->void:
 
 func _on_machine_cat_button_down() -> void:
 	print("you grabbed the cat from the washing machine")
+	# Ruckus music continues to play.
 	$WashingMachine/Wash.play("open")
 	task_completed = true
 	cat_state = CatStates.IDLE
