@@ -17,10 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://cjh483xgsqgxj" path="res://cat/scratch.png" id="11_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bbvcsp3i2vd13" path="res://cat/poke.png" id="13_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://dl6wekmg5p32" path="res://cat/idle.png" id="13_w48qg"]
-[ext_resource type="Texture2D" uid="uid://clggldfmvli1w" path="res://assets/room/backgroundobjects/window.png" id="14_getpj"]
-[ext_resource type="Texture2D" uid="uid://dy1gf2f44hefg" path="res://assets/room/backgroundobjects/torn_window.png" id="15_ryguw"]
-[ext_resource type="Texture2D" uid="uid://b6s7qf28y4tyb" path="res://assets/room/backgroundobjects/burnt_outlet.png" id="17_82xsv"]
-[ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://assets/room/backgroundobjects/outlet.png" id="18_getpj"]
+[ext_resource type="Texture2D" uid="uid://clggldfmvli1w" path="res://Assets/room/backgroundobjects/window.png" id="14_getpj"]
+[ext_resource type="Texture2D" uid="uid://dy1gf2f44hefg" path="res://Assets/room/backgroundobjects/torn_window.png" id="15_ryguw"]
+[ext_resource type="Texture2D" uid="uid://b6s7qf28y4tyb" path="res://Assets/room/backgroundobjects/burnt_outlet.png" id="17_82xsv"]
+[ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://Assets/room/backgroundobjects/outlet.png" id="18_getpj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
 atlas = ExtResource("6_cegan")
