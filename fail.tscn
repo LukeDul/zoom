@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://jll4kfl4cn1h"]
+
+[ext_resource type="Texture2D" uid="uid://daqpgjy18bvbw" path="res://IMG_8223.PNG" id="1_1jhv5"]
+[ext_resource type="AudioStream" uid="uid://dltlcmk7cum0" path="res://losing-horn-313723.mp3" id="2_cxby8"]
+
+[node name="Fail" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1jhv5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_cxby8")
+autoplay = true

@@ -1,7 +1,7 @@
 class_name RoomView extends Node2D
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
-var event_queue: Array[int] = [CatStates.CURTAINS, CatStates.OUTLET, CatStates.WASHING_MACHINE]
+var event_queue: Array[int] = [CatStates.WASHING_MACHINE, CatStates.OUTLET, CatStates.CURTAINS]
 @onready var idle_cat: TextureButton = $IdleCat
 @onready var outlet: Node2D = $Outlet
 @onready var washing_machine: Node2D = $WashingMachine
@@ -121,7 +121,7 @@ func start_outlet_event()->void:
 	
 	cur_tween = create_tween()
 	if cur_cat:
-		cur_tween.tween_property(cur_cat, "position", Vector2(cur_cat.position.x + 450, cur_cat.position.y - 200), 5) 
+		cur_tween.tween_property(cur_cat, "position", Vector2(cur_cat.position.x + 450, cur_cat.position.y - 200), 10) 
 		cur_tween.finished.connect(end_outlet_event)
 
 func end_outlet_event()->void:

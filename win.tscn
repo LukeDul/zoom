@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgacob1unmqjq"]
+
+[ext_resource type="Texture2D" uid="uid://c8cnjx0m4gn7s" path="res://cat/IMG_8224.PNG" id="1_wao2c"]
+[ext_resource type="AudioStream" uid="uid://ccsiopocs4gm6" path="res://Assets/room/backgroundobjects/winning-218995.mp3" id="2_hgi8f"]
+
+[node name="Win" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wao2c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hgi8f")
+autoplay = true
