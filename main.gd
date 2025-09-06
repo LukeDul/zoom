@@ -11,7 +11,7 @@ extends Node2D
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 enum TaskState {UNRESOLVED, SUCCESS, FAILURE}
 
-const TASK_TIMER_DURATION = 12.0
+const TASK_TIMER_DURATION = 1.0
 
 ## Maps the teacher's dialogue to possible player responses.
 const dialog_to_response: Dictionary[String, Array] = {
@@ -161,10 +161,11 @@ func end_game():
 		dialog_bubble.but1.disabled = true
 		dialog_bubble.but2.disabled = true
 		dialog_bubble.but3.disabled = true
+		await get_tree().create_timer(4.0).timeout
 		if score > 100: 
-			get_tree().change_scene_to_file("res://fail.tscn")
-		else: 
 			get_tree().change_scene_to_file("res://win.tscn")
+		else: 
+			get_tree().change_scene_to_file("res://fail.tscn")
 		
 
 func _on_camera_button_button_down() -> void:
