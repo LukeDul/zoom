@@ -88,11 +88,15 @@ func _on_turn_around_button_down() -> void:
 			
 			if hochberg_is_back:
 				print("Professor is back, continuing dialogue.")
-				hochberg.play("default")
+				
 				
 				if task_state == TaskState.SUCCESS:
+					hochberg.play("default")
+					print("Task was a success, displaying next dialogue.")
 					display_next_dialog()
 				else:
+					print("Task failed, displaying failure dialogue.")
+					hochberg.play("angry")
 					dialog_bubble.visible = true
 					dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
 					dialog_bubble.but1.visible = true
@@ -125,7 +129,11 @@ func _on_room_tasks_completed(success: bool):
 func _on_task_timer_timeout():
 	print("Timer ran out, professor is back!")
 	
-	hochberg.play("default")
+	# The professor is back, regardless of the view
+	#
+	if task_state == TaskState.SUCCESS:hochberg.play("default")
+	else: hochberg.play("angry")
+		
 	
 	game_cycle += 1
 	if game_cycle >= MAX_CYCLES:
