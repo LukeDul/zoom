@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=12 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://c3tt5mmmcmuht" path="res://Assets/room/background.png" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cyfr87o7pl1ka" path="res://room_view.gd" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://ea454mqj0bt" path="res://Assets/room/washingmachine.png" id="5_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b8xcs0w7k17je" path="res://Assets/room/cat.png" id="5_kek77"]
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
@@ -47,6 +48,7 @@ layout_mode = 2
 texture_normal = ExtResource("2_0xm2m")
 
 [node name="RoomView" type="Node2D" parent="."]
+script = ExtResource("4_4c57u")
 
 [node name="BackgroundSprite" type="Sprite2D" parent="RoomView"]
 texture = ExtResource("3_h2yge")
@@ -54,11 +56,16 @@ texture = ExtResource("3_h2yge")
 [node name="WashingMachine" type="Node2D" parent="RoomView"]
 position = Vector2(-673, 124)
 
-[node name="TextureButton" type="TextureButton" parent="RoomView/WashingMachine"]
+[node name="Door" type="TextureButton" parent="RoomView/WashingMachine"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(2.00765, 2.33872)
 texture_normal = ExtResource("5_7mycd")
+
+[node name="Cat" type="TextureButton" parent="RoomView/WashingMachine"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Window" type="Node2D" parent="RoomView"]
 position = Vector2(597, -358)
@@ -70,6 +77,13 @@ offset_right = -7.0
 offset_bottom = 403.0
 texture_normal = ExtResource("6_272bh")
 
+[node name="WindowCat" type="TextureButton" parent="RoomView/Window"]
+offset_left = -240.0
+offset_top = -76.0
+offset_right = -112.0
+offset_bottom = 180.0
+texture_normal = ExtResource("5_kek77")
+
 [node name="Outlet" type="Node2D" parent="RoomView"]
 position = Vector2(198, 245)
 
@@ -78,7 +92,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("7_5vw27")
 
-[node name="Cat" type="TextureButton" parent="RoomView"]
+[node name="IdleCat" type="TextureButton" parent="RoomView"]
+visible = false
 offset_left = -272.0
 offset_top = 111.0
 offset_right = -144.0
@@ -169,6 +184,7 @@ text = "3
 [connection signal="button_down" from="ComputerView/HBoxContainer/LeaveCall" to="." method="_on_leave_call_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/CameraButton" to="." method="_on_camera_button_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/ShareScreen" to="." method="_on_share_screen_button_down"]
+[connection signal="button_down" from="RoomView/Window/WindowCat" to="RoomView" method="_on_window_cat_button_down"]
 [connection signal="button_down" from="TurnAround" to="." method="_on_turn_around_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_button_down"]

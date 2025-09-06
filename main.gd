@@ -4,6 +4,8 @@ extends Node2D
 @onready var room_view: Node2D = $RoomView
 @onready var dialog_bubble: DialogBubble = $Dialog
 
+enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
+
 ## Maps hochbergs dialog to the possible responses. 
 const dialog_to_response: Dictionary[String, Array] = {
 	"hi": ["hello", "uh", "help"]
