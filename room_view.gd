@@ -7,6 +7,13 @@ enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 @onready var washing_machine: Node2D = $WashingMachine
 @onready var curtain: Node2D = $Window
 
+## Calls the function after the given seconds have passed. Returns the timer. 
+func call_later(seconds: float, callback_func: Callable) -> SceneTreeTimer:
+	var timer = get_tree().create_timer(seconds)
+	timer.timeout.connect(callback_func)
+	return timer
+
+
 var cur_cat: TextureButton
 
 var cat_state = CatStates.IDLE:
@@ -17,13 +24,13 @@ var cat_state = CatStates.IDLE:
 				idle_cat.visible = true
 			CatStates.CURTAINS: start_curtain_event()
 			CatStates.WASHING_MACHINE: pass
-			CatStates.OUTLET: pass
+			CatStates.OUTLET: start_outlet_event()
 			_: push_error("Unknown Cat State")
 		cat_state = v
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	cat_state = CatStates.CURTAINS
+	cat_state = CatStates.OUTLET
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,8 +42,10 @@ func _process(delta: float) -> void:
 		CatStates.OUTLET: pass
 		_: push_error("Unknown Cat State")
 		
+		
+## CURTAIN EVENT *********************************************************************************
 func start_curtain_event()->void:
-	print("cat is ripping curtain!!")
+	print("cat is ripping curtain!! stop him")
 	cur_cat = curtain.get_node("WindowCat")
 	cur_cat.visible = true
 	idle_cat.visible = false
@@ -54,10 +63,24 @@ func end_curtain_event()->void:
 func _on_window_cat_button_down() -> void:
 	print("you grabbed the cat")
 	cat_state = CatStates.IDLE
-
 	
-## Calls the function after the given seconds have passed. Returns the timer. 
-func call_later(seconds: float, callback_func: Callable) -> SceneTreeTimer:
-	var timer = get_tree().create_timer(seconds)
-	timer.timeout.connect(callback_func)
-	return timer
+## OUTLET EVENT *********************************************************************************
+func start_outlet_event()->void:
+	print("cat is about to electricute himself!! stop him")
+	cur_cat = outlet.get_node("Cat")
+	cur_cat.visible = true
+	idle_cat.visible = false
+	
+	var tween := create_tween()
+	tween.tween_property(cur_cat, "position", Vector2(cur_cat.position.x + 300, cur_cat.position.y), 1.5) 
+	tween.finished.connect(end_outlet_event)
+
+func end_outlet_event()->void:
+	if cat_state == CatStates.OUTLET:
+		print("cat electricuted himself")
+	
+	cat_state = CatStates.IDLE
+
+func _on_outlet_cat_button_down() -> void:
+	print("you grabbed the cat")
+	cat_state = CatStates.IDLE

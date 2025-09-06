@@ -78,6 +78,7 @@ offset_bottom = 403.0
 texture_normal = ExtResource("6_272bh")
 
 [node name="WindowCat" type="TextureButton" parent="RoomView/Window"]
+visible = false
 offset_left = -240.0
 offset_top = -76.0
 offset_right = -112.0
@@ -87,17 +88,23 @@ texture_normal = ExtResource("5_kek77")
 [node name="Outlet" type="Node2D" parent="RoomView"]
 position = Vector2(198, 245)
 
-[node name="TextureButton" type="TextureButton" parent="RoomView/Outlet"]
+[node name="OutletButton" type="TextureButton" parent="RoomView/Outlet"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("7_5vw27")
 
+[node name="Cat" type="TextureButton" parent="RoomView/Outlet"]
+offset_left = -416.0
+offset_top = -16.0
+offset_right = -288.0
+offset_bottom = 240.0
+texture_normal = ExtResource("5_kek77")
+
 [node name="IdleCat" type="TextureButton" parent="RoomView"]
-visible = false
-offset_left = -272.0
-offset_top = 111.0
-offset_right = -144.0
-offset_bottom = 367.0
+offset_left = -787.0
+offset_top = -343.0
+offset_right = -659.0
+offset_bottom = -87.0
 texture_normal = ExtResource("5_kek77")
 
 [node name="TurnAround" type="TextureButton" parent="."]
@@ -185,6 +192,7 @@ text = "3
 [connection signal="button_down" from="ComputerView/HBoxContainer/CameraButton" to="." method="_on_camera_button_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/ShareScreen" to="." method="_on_share_screen_button_down"]
 [connection signal="button_down" from="RoomView/Window/WindowCat" to="RoomView" method="_on_window_cat_button_down"]
+[connection signal="button_down" from="RoomView/Outlet/Cat" to="RoomView" method="_on_outlet_cat_button_down"]
 [connection signal="button_down" from="TurnAround" to="." method="_on_turn_around_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_button_down"]
