@@ -1,8 +1,10 @@
 extends Node2D
 
+
 @onready var turn_around = $TurnAround
 @onready var room_view: Node2D = $RoomView
 @onready var dialog_bubble: DialogBubble = $Dialog
+@onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 
@@ -53,14 +55,11 @@ func _on_texture_button_3_button_down() -> void:
 	print("option 3")
 	pass # Replace with function body.
 
-
 func _on_leave_call_button_down() -> void:
 	print("left call")
 
-
 func _on_camera_button_button_down() -> void:
 	print("disabled/enabled camera")
-
 
 func _on_share_screen_button_down() -> void:
 	print("shared screen")

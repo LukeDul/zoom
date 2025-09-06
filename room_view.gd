@@ -54,6 +54,7 @@ func _process(delta: float) -> void:
 ## CURTAIN EVENT *********************************************************************************
 func start_curtain_event()->void:
 	print("cat is ripping curtain!! stop him")
+	Global.play("tear")
 	cur_cat = curtain.get_node("WindowCat")
 	cur_cat.visible = true
 	idle_cat.visible = false
@@ -74,6 +75,7 @@ func _on_window_cat_button_down() -> void:
 	
 ## OUTLET EVENT *********************************************************************************
 func start_outlet_event()->void:
+	Global.play("hehe")
 	print("cat is about to electricute himself!! stop him")
 	cur_cat = outlet.get_node("OutletCat")
 	cur_cat.visible = true
@@ -85,6 +87,7 @@ func start_outlet_event()->void:
 
 func end_outlet_event()->void:
 	if cat_state == CatStates.OUTLET:
+		
 		print("cat electricuted himself")
 	
 	cat_state = CatStates.IDLE
@@ -97,6 +100,7 @@ func _on_outlet_cat_button_down() -> void:
 func start_washing_machine_event()->void:
 	print("cat is about to drown himself!! stop him")
 	cur_cat = washing_machine.get_node("Sprite2D")
+	Global.play("thump")
 	cur_cat.visible = true
 	idle_cat.visible = false
 	
@@ -106,7 +110,7 @@ func start_washing_machine_event()->void:
 
 func end_washing_machine_event()->void:
 	if cat_state == CatStates.OUTLET:
-		print("cat electricuted himself")
+		print("cat drowned himself")
 	
 	cat_state = CatStates.IDLE
 
