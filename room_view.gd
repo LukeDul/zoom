@@ -1,11 +1,11 @@
 class_name RoomView extends Node2D
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
-
+var event_queue: Array[int] = [CatStates.CURTAINS, CatStates.WASHING_MACHINE, CatStates.OUTLET]
 @onready var idle_cat: TextureButton = $IdleCat
 @onready var outlet: Node2D = $Outlet
 @onready var washing_machine: Node2D = $WashingMachine
-@onready var door = washing_machine.get_node("machine_door")
+#@onready var door = washing_machine.get_node("machine_door")
 @onready var curtain: Node2D = $Window
 
 # A custom signal to communicate back to the main script.
@@ -45,7 +45,17 @@ var cat_state = CatStates.IDLE:
 func _ready() -> void:
 	pass
 
+var is_holding_cat: bool = false:
+	set(v):
+		$HeldCat.visible = v
+		$IdleCat.visible = !v
+		is_holding_cat = v
+		
 func _process(delta: float) -> void:
+	if is_holding_cat == true:
+		$HeldCat.global_position = get_global_mouse_position()
+		
+	
 	if cat_state == CatStates.IDLE:
 		if Input.is_action_just_pressed("debug1"):
 			cat_state = CatStates.CURTAINS
@@ -64,14 +74,12 @@ func _process(delta: float) -> void:
 		CatStates.OUTLET: pass
 		_: push_error("Unknown Cat State")
 
-func start_random_event():
+func start_next_event():
 	task_completed = false
 	cat_event_started = true
 	
-	var states = [CatStates.CURTAINS, CatStates.WASHING_MACHINE, CatStates.OUTLET]
-	var random_state = states[randi() % states.size()]
-	
-	cat_state = random_state
+	cat_state = event_queue.pop_front()
+	self.show_cat_event()
 
 func show_cat_event():
 	pass
@@ -115,6 +123,7 @@ func _on_window_cat_button_down() -> void:
 	print("you grabbed the cat")
 	task_completed = true
 	cat_state = CatStates.IDLE
+	is_holding_cat = true 
 	
 func start_outlet_event()->void:
 	Global.play("hehe")
@@ -167,6 +176,6 @@ func _on_machine_cat_button_down() -> void:
 	task_completed = true
 	cat_state = CatStates.IDLE
 
-func _on_machine_door_button_down() -> void:
-	if door:
-		door.visible = !door.visible
+#func _on_machine_door_button_down() -> void:
+	#if door:
+		#door.visible = !door.visible

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjh483xgsqgxj"
-path="res://.godot/imported/scratch.png-77e5fb51e01cc2c4fa1e7e1deb2591c3.ctex"
+uid="uid://h20f1la57gxb"
+path="res://.godot/imported/cat_idle.PNG-5d40d4b928925623136aebe2e0682b83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cat/scratch.png"
-dest_files=["res://.godot/imported/scratch.png-77e5fb51e01cc2c4fa1e7e1deb2591c3.ctex"]
+source_file="res://cat/cat_idle.PNG"
+dest_files=["res://.godot/imported/cat_idle.PNG-5d40d4b928925623136aebe2e0682b83.ctex"]
 
 [params]
 

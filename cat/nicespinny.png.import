@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbvcsp3i2vd13"
-path="res://.godot/imported/poke.png-f3620eafd56b65673936ad11fc87e794.ctex"
+uid="uid://cop1swg24hyd6"
+path="res://.godot/imported/nicespinny.png-68eaf27e3de6a606941aae6ebae99780.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cat/poke.png"
-dest_files=["res://.godot/imported/poke.png-f3620eafd56b65673936ad11fc87e794.ctex"]
+source_file="res://cat/nicespinny.png"
+dest_files=["res://.godot/imported/nicespinny.png-68eaf27e3de6a606941aae6ebae99780.ctex"]
 
 [params]
 

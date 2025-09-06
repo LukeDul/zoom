@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1pbfisiwts4h"
-path="res://.godot/imported/fork.PNG-403620fa9a6ff0feb09fbc3294b9c359.ctex"
+uid="uid://dyscop3cbnfxm"
+path="res://.godot/imported/tornn.PNG-51d82899cddcc7eaf4756d6de4ec4c07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cat/fork.PNG"
-dest_files=["res://.godot/imported/fork.PNG-403620fa9a6ff0feb09fbc3294b9c359.ctex"]
+source_file="res://cat/tornn.PNG"
+dest_files=["res://.godot/imported/tornn.PNG-51d82899cddcc7eaf4756d6de4ec4c07.ctex"]
 
 [params]
 

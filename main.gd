@@ -7,6 +7,7 @@ extends Node2D
 @onready var computer_view: Node2D = $ComputerView
 @onready var hochberg: AnimatedSprite2D = $ComputerView/Hochberg
 @onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
+	
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 
@@ -45,20 +46,6 @@ func display_next_dialog()->void:
 	dialog_bubble.set_dialog(current_dialog, responses)
 	
 	cur_dialog_id += 1
-	
-	if current_dialog.contains("right back"):
-		# Hide the buttons for the cutscene
-		if dialog_bubble:
-			dialog_bubble.but1.visible = false
-			dialog_bubble.but2.visible = false
-			dialog_bubble.but3.visible = false
-		
-		# Trigger the event where the teacher leaves.
-		turn_around.visible = false
-		await get_tree().create_timer(1.5).timeout
-		_on_leave_call_button_down()
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,6 +57,7 @@ func _ready() -> void:
 
 func _on_leave_call_button_down() -> void:
 	hochberg.play("gone")
+	
 	# Teacher leaves, show the turn around button.
 	# We also need to hide the dialogue bubble.
 	if dialog_bubble:
@@ -79,7 +67,7 @@ func _on_leave_call_button_down() -> void:
 	room_view_button_ready = true
 	
 	# The timer and event now start as soon as the teacher leaves.
-	room_view.start_random_event()
+	room_view.start_next_event()
 	room_view.set_task_time_limit(15.0)
 	
 
@@ -93,12 +81,12 @@ func _on_turn_around_button_down() -> void:
 			dialog_bubble.visible = false
 		
 		# When the player turns around, they need to see the cat.
-		if room_view:
-			room_view.show_cat_event()
+		#if room_view:
+			#room_view.show_cat_event()
 
 func _on_room_tasks_completed(success: bool):
 	print("TASK COMPLETED")
-	room_view.visible = false
+	#room_view.visible = false
 	turn_around.visible = true
 	dialog_bubble.visible = true
 	print("success?", success)
@@ -139,13 +127,23 @@ func _on_share_screen_button_down() -> void:
 	print("shared screen")
 
 func _on_option_3_button_down() -> void:
+	if dialog_list[cur_dialog_id-1].contains("right back"):
+		_on_leave_call_button_down()
+		return
+		
 	print("option 3")
 	display_next_dialog()
 
 func _on_option_2_button_down() -> void:
+	if dialog_list[cur_dialog_id-1].contains("right back"):
+		_on_leave_call_button_down()
+		return
 	print("option 2")
 	display_next_dialog()
 
 func _on_option_1_button_down() -> void:
+	if dialog_list[cur_dialog_id-1].contains("right back"):
+		_on_leave_call_button_down()
+		return
 	print("option 1")
 	display_next_dialog()

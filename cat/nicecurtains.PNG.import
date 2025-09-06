@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl6wekmg5p32"
-path="res://.godot/imported/idle.png-b298ec8cf0ad179cffa5a77efbd998ef.ctex"
+uid="uid://csuim7a0nnapx"
+path="res://.godot/imported/nicecurtains.PNG-7814b07cf61653fe0bbcf46f2fd88461.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cat/idle.png"
-dest_files=["res://.godot/imported/idle.png-b298ec8cf0ad179cffa5a77efbd998ef.ctex"]
+source_file="res://cat/nicecurtains.PNG"
+dest_files=["res://.godot/imported/nicecurtains.PNG-7814b07cf61653fe0bbcf46f2fd88461.ctex"]
 
 [params]
 
