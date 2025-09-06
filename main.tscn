@@ -1,45 +1,57 @@
-[gd_scene load_steps=37 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=45 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cyfr87o7pl1ka" path="res://room_view.gd" id="4_4c57u"]
+[ext_resource type="Texture2D" uid="uid://di80utujppvoc" path="res://drive-download-20250906T211800Z-1-001/IMG_8201.PNG" id="4_ryguw"]
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
-[ext_resource type="Texture2D" uid="uid://cuvlv6qbcnfwn" path="res://Assets/computer/Computer.png" id="5_yaehf"]
-[ext_resource type="Texture2D" uid="uid://mcfhjpxif063" path="res://Assets/computer/Hands.png" id="6_074og"]
-[ext_resource type="Texture2D" uid="uid://2woeniy1js70" path="res://Assets/computer/hochberg/Happy.png" id="6_cegan"]
-[ext_resource type="Texture2D" uid="uid://dx7klt3nw3i4i" path="res://Assets/computer/hochberg/Grump.png" id="7_82xsv"]
-[ext_resource type="Texture2D" uid="uid://bv0vekf0f2m61" path="res://Assets/computer/hochberg/Turn.png" id="8_getpj"]
+[ext_resource type="Texture2D" uid="uid://buliwsq2qgipm" path="res://drive-download-20250906T211800Z-1-001/IMG_8202.PNG" id="6_1u8w0"]
+[ext_resource type="Texture2D" uid="uid://dy56knytoyo10" path="res://drive-download-20250906T211800Z-1-001/IMG_8203.PNG" id="7_0odxb"]
+[ext_resource type="Texture2D" uid="uid://bqpk806i6px03" path="res://drive-download-20250906T211800Z-1-001/IMG_8209.PNG" id="7_getpj"]
+[ext_resource type="Texture2D" uid="uid://318hhuacqhcs" path="res://drive-download-20250906T211800Z-1-001/IMG_8210.PNG" id="8_ryguw"]
+[ext_resource type="Texture2D" uid="uid://bbhc50dkt1nc0" path="res://drive-download-20250906T211800Z-1-001/IMG_8211.PNG" id="9_d13ii"]
+[ext_resource type="Texture2D" uid="uid://clgw5jqvdfutu" path="res://drive-download-20250906T211800Z-1-001/IMG_8208.PNG" id="10_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://cp2w5ubhoafnc" path="res://cat/background.PNG" id="10_82xsv"]
+[ext_resource type="Texture2D" uid="uid://w2c1ha4a56fp" path="res://drive-download-20250906T211800Z-1-001/IMG_8212.PNG" id="11_0odxb"]
+[ext_resource type="Script" uid="uid://djk4rjdve47e8" path="res://hochberg.gd" id="11_lswn8"]
 [ext_resource type="Texture2D" uid="uid://cop1swg24hyd6" path="res://cat/nicespinny.png" id="12_getpj"]
 [ext_resource type="Texture2D" uid="uid://cos0i846xq3jp" path="res://cat/wash.PNG" id="12_ryguw"]
 [ext_resource type="Texture2D" uid="uid://c35rh4qkc7bn6" path="res://cat/open_wash.PNG" id="13_d13ii"]
 [ext_resource type="Texture2D" uid="uid://csuim7a0nnapx" path="res://cat/nicecurtains.PNG" id="13_getpj"]
 [ext_resource type="Texture2D" uid="uid://h20f1la57gxb" path="res://cat/cat_idle.PNG" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://cawchm22p0b7n" path="res://drive-download-20250906T211800Z-1-001/IMG_8207.PNG" id="13_xuqvo"]
 [ext_resource type="Texture2D" uid="uid://dyscop3cbnfxm" path="res://cat/tornn.PNG" id="14_ryguw"]
 [ext_resource type="Texture2D" uid="uid://b5765ui6vipjp" path="res://cat/cat_outlet.PNG" id="16_82xsv"]
 [ext_resource type="Texture2D" uid="uid://b2gu0ot48fa1k" path="res://cat/cat_curtain.PNG" id="16_getpj"]
 [ext_resource type="Texture2D" uid="uid://dc3q60oxbr2mg" path="res://cat/burned_outlet.PNG" id="17_getpj"]
+[ext_resource type="Script" uid="uid://im5udfb624c7" path="res://wash.gd" id="17_kq58d"]
+[ext_resource type="Texture2D" uid="uid://na18h7tjsjso" path="res://IMG_8215.PNG" id="17_qsp4k"]
 [ext_resource type="Texture2D" uid="uid://dxlswvsgkypmk" path="res://cat/new_outlet.PNG" id="18_ryguw"]
 [ext_resource type="Texture2D" uid="uid://1pbfisiwts4h" path="res://cat/fork.PNG" id="19_ryguw"]
 [ext_resource type="Texture2D" uid="uid://degxtxb3uoerr" path="res://cat/cat_held.PNG" id="20_getpj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
-atlas = ExtResource("7_82xsv")
-region = Rect2(0, 0, 2048, 2048)
+[ext_resource type="Texture2D" uid="uid://cgt8dth0wmrom" path="res://drive-download-20250906T211800Z-1-001/IMG_8213.PNG" id="26_a6jrf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
-atlas = ExtResource("6_cegan")
+atlas = ExtResource("7_getpj")
 region = Rect2(0, 0, 2048, 2048)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
-atlas = ExtResource("8_getpj")
+atlas = ExtResource("8_ryguw")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq58d"]
+atlas = ExtResource("9_d13ii")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seu75"]
+atlas = ExtResource("10_1u8w0")
 region = Rect2(0, 0, 2048, 2048)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w48qg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_getpj")
+"texture": SubResource("AtlasTexture_ryguw")
 }],
 "loop": true,
 "name": &"angry",
@@ -47,7 +59,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ryguw")
+"texture": SubResource("AtlasTexture_d13ii")
 }],
 "loop": true,
 "name": &"default",
@@ -55,10 +67,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d13ii")
+"texture": SubResource("AtlasTexture_kq58d")
 }],
 "loop": true,
 "name": &"gone",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seu75")
+}],
+"loop": true,
+"name": &"happy",
 "speed": 5.0
 }]
 
@@ -143,8 +163,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_getpj"]
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
 
@@ -179,17 +197,43 @@ texture_normal = ExtResource("2_0xm2m")
 
 [node name="Computer" type="Sprite2D" parent="ComputerView"]
 position = Vector2(4, 208)
-texture = ExtResource("5_yaehf")
+texture = ExtResource("4_ryguw")
 
 [node name="Hands" type="Sprite2D" parent="ComputerView"]
 position = Vector2(-6, 276)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_074og")
+
+[node name="left" type="Sprite2D" parent="ComputerView/Hands"]
+position = Vector2(-694, 756)
+texture = ExtResource("6_1u8w0")
+
+[node name="right" type="Sprite2D" parent="ComputerView/Hands"]
+position = Vector2(724, 724)
+texture = ExtResource("7_0odxb")
 
 [node name="Hochberg" type="AnimatedSprite2D" parent="ComputerView"]
-position = Vector2(-188, -171)
-scale = Vector2(0.6, 0.6)
+position = Vector2(-54, -144)
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_w48qg")
+script = ExtResource("11_lswn8")
+
+[node name="Sprite2D" type="Sprite2D" parent="ComputerView/Hochberg"]
+visible = false
+position = Vector2(362.5, -10)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11_0odxb")
+
+[node name="ColorRect" type="ColorRect" parent="ComputerView"]
+offset_left = -568.0
+offset_top = 8.0
+offset_right = 489.0
+offset_bottom = 275.0
+color = Color(0, 0, 0, 1)
+
+[node name="You" type="Sprite2D" parent="."]
+position = Vector2(-483, -28)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("13_xuqvo")
 
 [node name="RoomView" type="Node2D" parent="."]
 script = ExtResource("4_4c57u")
@@ -204,6 +248,12 @@ scale = Vector2(1.4, 1.4)
 [node name="Wash" type="AnimatedSprite2D" parent="RoomView/WashingMachine"]
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_82xsv")
+script = ExtResource("17_kq58d")
+
+[node name="Sprite2D" type="Sprite2D" parent="RoomView/WashingMachine/Wash"]
+position = Vector2(259.524, 254.762)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("17_qsp4k")
 
 [node name="Sprite2D" type="Sprite2D" parent="RoomView/WashingMachine"]
 visible = false
@@ -252,6 +302,7 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_a6jrf")
 
 [node name="OutletCat" type="TextureButton" parent="RoomView/Outlet"]
+visible = false
 offset_left = -899.0
 offset_top = -12.0
 offset_right = 1149.0
@@ -264,11 +315,22 @@ position = Vector2(1850, 730)
 rotation = 1.3164
 texture = ExtResource("19_ryguw")
 
+[node name="Bed" type="Sprite2D" parent="RoomView"]
+position = Vector2(557, 155)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("26_a6jrf")
+
+[node name="TextureButton" type="TextureButton" parent="RoomView/Bed"]
+offset_left = -352.0
+offset_top = 173.0
+offset_right = 703.0
+offset_bottom = 712.0
+
 [node name="IdleCat" type="TextureButton" parent="RoomView"]
-offset_left = -872.0
-offset_top = -463.0
-offset_right = 1176.0
-offset_bottom = 1585.0
+offset_left = 461.0
+offset_top = 28.0
+offset_right = 2509.0
+offset_bottom = 2076.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("13_w48qg")
 
@@ -276,17 +338,6 @@ texture_normal = ExtResource("13_w48qg")
 visible = false
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("20_getpj")
-
-[node name="Bed" type="Sprite2D" parent="RoomView"]
-position = Vector2(-695, -173)
-scale = Vector2(124.5, 133.5)
-texture = SubResource("PlaceholderTexture2D_getpj")
-
-[node name="TextureButton" type="TextureButton" parent="RoomView/Bed"]
-offset_left = -0.504016
-offset_top = -0.496255
-offset_right = 0.495984
-offset_bottom = 0.503745
 
 [node name="TurnAround" type="TextureButton" parent="."]
 visible = false
@@ -298,30 +349,31 @@ texture_normal = ExtResource("2_0xm2m")
 
 [node name="Dialog" type="Node2D" parent="."]
 visible = false
-position = Vector2(-667, 77)
+position = Vector2(-649, 155)
+scale = Vector2(0.7, 0.7)
 script = ExtResource("5_lquwl")
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
 offset_left = 114.0
 offset_top = -221.0
-offset_right = 1165.0
+offset_right = 1631.0
 offset_bottom = 182.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="Dialog/ColorRect"]
 layout_mode = 0
-offset_right = 1050.0
-offset_bottom = 240.0
-theme_override_font_sizes/font_size = 40
+offset_right = 1517.0
+offset_bottom = 168.0
+theme_override_font_sizes/font_size = 50
 text = "words words words"
 autowrap_mode = 2
 clip_text = true
 
 [node name="TextOptions" type="VBoxContainer" parent="Dialog/ColorRect"]
 layout_mode = 0
-offset_top = 180.0
-offset_right = 1049.0
-offset_bottom = 235.0
+offset_top = 155.0
+offset_right = 1503.0
+offset_bottom = 386.0
 
 [node name="label1" type="Label" parent="Dialog/ColorRect/TextOptions"]
 layout_mode = 2

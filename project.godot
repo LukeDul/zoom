@@ -24,6 +24,10 @@ Global="*res://Global.tscn"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[gui]
+
+theme/custom_font="uid://c8tma1j3rm3qp"
+
 [input]
 
 debug1={

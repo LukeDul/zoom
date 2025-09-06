@@ -1,7 +1,7 @@
 class_name RoomView extends Node2D
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
-var event_queue: Array[int] = [CatStates.OUTLET, CatStates.WASHING_MACHINE, CatStates.OUTLET]
+var event_queue: Array[int] = [CatStates.CURTAINS, CatStates.OUTLET, CatStates.WASHING_MACHINE]
 @onready var idle_cat: TextureButton = $IdleCat
 @onready var outlet: Node2D = $Outlet
 @onready var washing_machine: Node2D = $WashingMachine
