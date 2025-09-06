@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxamph3nk3xbi"
-path="res://.godot/imported/IMG_8161.png-f8bd18c4717c61fea5b4797ebd5483f7.ctex"
+uid="uid://bv0vekf0f2m61"
+path="res://.godot/imported/Turn.png-f885216a5cf44537ea8798ad73bce382.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgroundobjects/IMG_8161.png"
-dest_files=["res://.godot/imported/IMG_8161.png-f8bd18c4717c61fea5b4797ebd5483f7.ctex"]
+source_file="res://Assets/computer/hochberg/Turn.png"
+dest_files=["res://.godot/imported/Turn.png-f885216a5cf44537ea8798ad73bce382.ctex"]
 
 [params]
 

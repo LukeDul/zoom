@@ -1,9 +1,12 @@
 extends Node2D
 
+
 @onready var turn_around = $TurnAround
 @onready var room_view: Node2D = $RoomView
 @onready var dialog_bubble: DialogBubble = $Dialog
-# @onready var cat_sound_player: AudioStreamPlayer = $CatSoundPlayer # Add this node to your scene and attach your sound to it.
+
+@onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
+
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 
 ## Maps the teacher's dialogue to possible player responses.
@@ -146,3 +149,8 @@ func end_game():
 		dialog_bubble.but1.disabled = true
 		dialog_bubble.but2.disabled = true
 		dialog_bubble.but3.disabled = true
+func _on_camera_button_button_down() -> void:
+	print("disabled/enabled camera")
+
+func _on_share_screen_button_down() -> void:
+	print("shared screen")

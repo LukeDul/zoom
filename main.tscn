@@ -1,30 +1,104 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=33 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://c3tt5mmmcmuht" path="res://Assets/room/background.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://cyfr87o7pl1ka" path="res://room_view.gd" id="4_4c57u"]
-[ext_resource type="Texture2D" uid="uid://bhuq4pdlsuklu" path="res://Assets/computer/face.png" id="4_dg77c"]
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
-[ext_resource type="Texture2D" uid="uid://dxamph3nk3xbi" path="res://backgroundobjects/IMG_8161.png" id="7_vivmo"]
+[ext_resource type="Texture2D" uid="uid://cuvlv6qbcnfwn" path="res://Assets/computer/Computer.png" id="5_yaehf"]
+[ext_resource type="Texture2D" uid="uid://mcfhjpxif063" path="res://Assets/computer/Hands.png" id="6_074og"]
+[ext_resource type="Texture2D" uid="uid://2woeniy1js70" path="res://Assets/computer/hochberg/Happy.png" id="6_cegan"]
+[ext_resource type="Texture2D" uid="uid://dx7klt3nw3i4i" path="res://Assets/computer/hochberg/Grump.png" id="7_82xsv"]
+[ext_resource type="Texture2D" uid="uid://dxamph3nk3xbi" path="res://Assets/room/backgroundobjects/machine_background.png" id="7_vivmo"]
 [ext_resource type="Texture2D" uid="uid://b2wt1ttugf3il" path="res://Assets/room/door.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bv0vekf0f2m61" path="res://Assets/computer/hochberg/Turn.png" id="8_getpj"]
 [ext_resource type="Texture2D" uid="uid://bbd4t6wx1gvja" path="res://cat/spinny.png" id="8_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://clggldfmvli1w" path="res://backgroundobjects/IMG_8163.png" id="10_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://cjh483xgsqgxj" path="res://cat/scratch.png" id="11_yaehf"]
-[ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://backgroundobjects/IMG_8159.png" id="12_vivmo"]
 [ext_resource type="Texture2D" uid="uid://bbvcsp3i2vd13" path="res://cat/poke.png" id="13_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://dl6wekmg5p32" path="res://cat/idle.png" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://clggldfmvli1w" path="res://assets/room/backgroundobjects/window.png" id="14_getpj"]
+[ext_resource type="Texture2D" uid="uid://dy1gf2f44hefg" path="res://assets/room/backgroundobjects/torn_window.png" id="15_ryguw"]
+[ext_resource type="Texture2D" uid="uid://b6s7qf28y4tyb" path="res://assets/room/backgroundobjects/burnt_outlet.png" id="17_82xsv"]
+[ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://assets/room/backgroundobjects/outlet.png" id="18_getpj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ycdy4"]
-atlas = ExtResource("4_dg77c")
-region = Rect2(0, 0, 256, 256)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
+atlas = ExtResource("6_cegan")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
+atlas = ExtResource("7_82xsv")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u8w0"]
+atlas = ExtResource("8_getpj")
+region = Rect2(0, 0, 2048, 2048)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w48qg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ycdy4")
+"texture": SubResource("AtlasTexture_ryguw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u8w0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6jrf"]
+atlas = ExtResource("14_getpj")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
+atlas = ExtResource("15_ryguw")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsp4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6jrf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuqvo")
+}],
+"loop": true,
+"name": &"torn",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0odxb"]
+atlas = ExtResource("17_82xsv")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lswn8"]
+atlas = ExtResource("18_getpj")
+region = Rect2(0, 0, 2048, 2048)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6jrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0odxb")
+}],
+"loop": true,
+"name": &"burnt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lswn8")
 }],
 "loop": true,
 "name": &"default",
@@ -67,10 +141,22 @@ texture_normal = ExtResource("2_0xm2m")
 layout_mode = 2
 texture_normal = ExtResource("2_0xm2m")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ComputerView"]
+[node name="Computer" type="Sprite2D" parent="ComputerView"]
+position = Vector2(4, 208)
+texture = ExtResource("5_yaehf")
+
+[node name="Hands" type="Sprite2D" parent="ComputerView"]
+position = Vector2(-6, 276)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_074og")
+
+[node name="Hochberg" type="AnimatedSprite2D" parent="ComputerView"]
+position = Vector2(-188, -171)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_w48qg")
 
 [node name="RoomView" type="Node2D" parent="."]
+visible = false
 script = ExtResource("4_4c57u")
 
 [node name="BackgroundSprite" type="Sprite2D" parent="RoomView"]
@@ -115,42 +201,35 @@ offset_bottom = 281.0
 texture_normal = ExtResource("8_efxa6")
 
 [node name="Window" type="Node2D" parent="RoomView"]
-position = Vector2(597, -358)
+position = Vector2(543, -55)
 
-[node name="TextureButton" type="TextureButton" parent="RoomView/Window"]
-offset_left = -263.0
-offset_top = -109.0
-offset_right = -7.0
-offset_bottom = 403.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("10_2cqfq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RoomView/Window"]
+position = Vector2(60, 178)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_qsp4k")
 
 [node name="WindowCat" type="TextureButton" parent="RoomView/Window"]
-visible = false
-offset_left = -203.0
-offset_top = -120.0
-offset_right = 1845.0
-offset_bottom = 1928.0
+offset_left = -242.0
+offset_top = -222.0
+offset_right = 1806.0
+offset_bottom = 1826.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("11_yaehf")
 
 [node name="Outlet" type="Node2D" parent="RoomView"]
 position = Vector2(198, 245)
 
-[node name="OutletButton" type="TextureButton" parent="RoomView/Outlet"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.1, 0.1)
-texture_normal = ExtResource("12_vivmo")
-
 [node name="OutletCat" type="TextureButton" parent="RoomView/Outlet"]
-visible = false
 offset_left = -551.0
 offset_top = -274.0
 offset_right = 1497.0
 offset_bottom = 1774.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("13_2cqfq")
+
+[node name="OutletSprite" type="AnimatedSprite2D" parent="RoomView/Outlet"]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_a6jrf")
 
 [node name="IdleCat" type="TextureButton" parent="RoomView"]
 offset_left = -713.0
@@ -169,7 +248,7 @@ texture_normal = ExtResource("2_0xm2m")
 
 [node name="Dialog" type="Node2D" parent="."]
 visible = false
-position = Vector2(449, 79)
+position = Vector2(456, -219)
 script = ExtResource("5_lquwl")
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
@@ -245,6 +324,8 @@ offset_right = 98.0
 offset_bottom = 97.0
 text = "3
 "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="button_down" from="ComputerView/HBoxContainer/MuteButton" to="." method="_on_mute_button_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/LeaveCall" to="." method="_on_leave_call_button_down"]

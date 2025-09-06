@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oskayvmqam2u"
-path="res://.godot/imported/IMG_8162.png-53f2eb5223b14cb81a051de3de0ee849.ctex"
+uid="uid://dy1gf2f44hefg"
+path="res://.godot/imported/torn_window.png-2da7cb52d5f045b76318fe07f325be19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgroundobjects/IMG_8162.png"
-dest_files=["res://.godot/imported/IMG_8162.png-53f2eb5223b14cb81a051de3de0ee849.ctex"]
+source_file="res://Assets/room/backgroundobjects/torn_window.png"
+dest_files=["res://.godot/imported/torn_window.png-2da7cb52d5f045b76318fe07f325be19.ctex"]
 
 [params]
 
