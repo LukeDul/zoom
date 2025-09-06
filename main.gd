@@ -107,16 +107,18 @@ func _on_turn_around_button_down() -> void:
 			# Check if the professor is back, then continue the dialogue
 			if hochberg_is_back:
 				print("Professor is back, continuing dialogue.")
-				hochberg.play("default")
+				
 				
 				# --- START OF FIX ---
 				# This logic is moved from _on_task_timer_timeout to prevent
 				# calling that function and incrementing the game cycle twice.
 				if task_state == TaskState.SUCCESS:
+					hochberg.play("default")
 					print("Task was a success, displaying next dialogue.")
 					display_next_dialog()
 				else:
 					print("Task failed, displaying failure dialogue.")
+					hochberg.play("angry")
 					dialog_bubble.visible = true
 					dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
 					dialog_bubble.but1.visible = true
@@ -155,7 +157,10 @@ func _on_task_timer_timeout():
 	print("Timer ran out, professor is back!")
 	
 	# The professor is back, regardless of the view
-	hochberg.play("default")
+	#
+	if task_state == TaskState.SUCCESS:hochberg.play("default")
+	else: hochberg.play("angry")
+		
 	
 	# Check if the game cycle is over
 	game_cycle += 1

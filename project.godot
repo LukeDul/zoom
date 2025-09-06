@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zoom"
-run/main_scene="uid://dvirkprp27esk"
+run/main_scene="uid://bi3jgdss41gjs"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

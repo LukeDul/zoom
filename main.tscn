@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=46 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://cos0i846xq3jp" path="res://cat/wash.PNG" id="12_ryguw"]
 [ext_resource type="Texture2D" uid="uid://c35rh4qkc7bn6" path="res://cat/open_wash.PNG" id="13_d13ii"]
 [ext_resource type="Texture2D" uid="uid://csuim7a0nnapx" path="res://cat/nicecurtains.PNG" id="13_getpj"]
+[ext_resource type="Texture2D" uid="uid://dr5d00c4t31sq" path="res://IMG_8222.PNG" id="13_seu75"]
 [ext_resource type="Texture2D" uid="uid://h20f1la57gxb" path="res://cat/cat_idle.PNG" id="13_w48qg"]
-[ext_resource type="Texture2D" uid="uid://cawchm22p0b7n" path="res://drive-download-20250906T211800Z-1-001/IMG_8207.PNG" id="13_xuqvo"]
 [ext_resource type="Texture2D" uid="uid://dyscop3cbnfxm" path="res://cat/tornn.PNG" id="14_ryguw"]
 [ext_resource type="Texture2D" uid="uid://b5765ui6vipjp" path="res://cat/cat_outlet.PNG" id="16_82xsv"]
 [ext_resource type="Texture2D" uid="uid://b2gu0ot48fa1k" path="res://cat/cat_curtain.PNG" id="16_getpj"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://1pbfisiwts4h" path="res://cat/fork.PNG" id="19_ryguw"]
 [ext_resource type="Texture2D" uid="uid://degxtxb3uoerr" path="res://cat/cat_held.PNG" id="20_getpj"]
 [ext_resource type="Texture2D" uid="uid://cgt8dth0wmrom" path="res://drive-download-20250906T211800Z-1-001/IMG_8213.PNG" id="26_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://c84dmyc0iw1wi" path="res://cat/IMG_8216.PNG" id="30_seu75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
 atlas = ExtResource("7_getpj")
@@ -231,11 +232,12 @@ offset_bottom = 275.0
 color = Color(0, 0, 0, 1)
 
 [node name="You" type="Sprite2D" parent="."]
-position = Vector2(-483, -28)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("13_xuqvo")
+position = Vector2(-437, -49)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("13_seu75")
 
 [node name="RoomView" type="Node2D" parent="."]
+visible = false
 script = ExtResource("4_4c57u")
 
 [node name="BackgroundSprite" type="Sprite2D" parent="RoomView"]
@@ -340,12 +342,12 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("20_getpj")
 
 [node name="TurnAround" type="TextureButton" parent="."]
-visible = false
-offset_left = 823.0
-offset_top = 411.0
-offset_right = 951.0
-offset_bottom = 539.0
-texture_normal = ExtResource("2_0xm2m")
+offset_left = 682.0
+offset_top = 387.0
+offset_right = 1620.0
+offset_bottom = 887.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("30_seu75")
 
 [node name="Dialog" type="Node2D" parent="."]
 visible = false

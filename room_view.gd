@@ -134,6 +134,7 @@ func _on_outlet_cat_button_down() -> void:
 	print("you grabbed the cat")
 	task_completed = true
 	cat_state = CatStates.IDLE
+	Global.stop()
 	is_holding_cat = true
 	
 func start_washing_machine_event()->void:
@@ -158,6 +159,7 @@ func _on_machine_cat_button_down() -> void:
 	print("you grabbed the cat from the washing machine")
 	$WashingMachine/Wash.play("open")
 	task_completed = true
+	Global.stop()
 	cat_state = CatStates.IDLE
 	is_holding_cat = true
 
