@@ -180,6 +180,7 @@ offset_bottom = 182.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="Dialog/ColorRect"]
+layout_mode = 0
 offset_right = 390.0
 offset_bottom = 240.0
 theme_override_font_sizes/font_size = 50
@@ -188,6 +189,7 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="Label2" type="Label" parent="Dialog/ColorRect"]
+layout_mode = 0
 offset_left = 4.0
 offset_top = 207.0
 offset_right = 384.0
@@ -208,6 +210,7 @@ texture_normal = SubResource("NoiseTexture2D_lquwl")
 texture_disabled = ExtResource("2_0xm2m")
 
 [node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton"]
+layout_mode = 0
 offset_left = 58.0
 offset_top = 48.0
 offset_right = 98.0
@@ -221,6 +224,7 @@ texture_normal = SubResource("NoiseTexture2D_lquwl")
 texture_disabled = ExtResource("2_0xm2m")
 
 [node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton2"]
+layout_mode = 0
 offset_left = 58.0
 offset_top = 48.0
 offset_right = 98.0
@@ -234,6 +238,7 @@ texture_normal = SubResource("NoiseTexture2D_lquwl")
 texture_disabled = ExtResource("2_0xm2m")
 
 [node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton3"]
+layout_mode = 0
 offset_left = 58.0
 offset_top = 48.0
 offset_right = 98.0
