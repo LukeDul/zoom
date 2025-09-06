@@ -94,26 +94,6 @@ func _on_turn_around_button_down() -> void:
 			room_view.visible = false
 			computer_view.visible = true
 			
-			if hochberg_is_back:
-				dialog_bubble.visible = true
-				hochberg.play("default") # Professor comes back to the screen
-				
-				# Check if the game cycle is over
-				game_cycle += 1
-				if game_cycle >= MAX_CYCLES:
-					end_game()
-				else:
-					# Respond based on task state
-					if task_state == TaskState.SUCCESS:
-						display_next_dialog()
-					else:
-						dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
-						dialog_bubble.but1.visible = true
-						dialog_bubble.but2.visible = true
-						dialog_bubble.but3.visible = true
-					# Reset the flag after handling the dialogue
-					hochberg_is_back = false
-			
 		else:
 			# Player is in interview view, so turn to room
 			room_view.visible = true
@@ -143,12 +123,27 @@ func _on_task_timer_timeout():
 	print("Timer ran out, professor is back!")
 	
 	# The professor is back, regardless of the view
-	hochberg_is_back = true
+	hochberg.play("default")
 	
-	if room_view.visible:
-		# Player is still in the room, show "ahem!" to prompt a manual return
-		dialog_bubble.visible = true
-		dialog_bubble.set_dialog("Ahem!", [])
+	# Check if the game cycle is over
+	game_cycle += 1
+	if game_cycle >= MAX_CYCLES:
+		end_game()
+	else:
+		if computer_view.visible:
+			# If the player is on the computer view, the dialogue appears automatically
+			if task_state == TaskState.SUCCESS:
+				display_next_dialog()
+			else:
+				dialog_bubble.visible = true
+				dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
+				dialog_bubble.but1.visible = true
+				dialog_bubble.but2.visible = true
+				dialog_bubble.but3.visible = true
+		else:
+			# Player is still in the room, show "ahem!" to prompt a manual return
+			dialog_bubble.visible = true
+			dialog_bubble.set_dialog("Ahem!", [])
 
 
 func end_game():
