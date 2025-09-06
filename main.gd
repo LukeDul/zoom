@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @onready var turn_around = $TurnAround
 @onready var room_view: Node2D = $RoomView
 @onready var dialog_bubble: DialogBubble = $Dialog
@@ -12,17 +11,26 @@ extends Node2D
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
 enum TaskState {UNRESOLVED, SUCCESS, FAILURE}
 
-const TASK_TIMER_DURATION = 15.0
+const TASK_TIMER_DURATION = 5.0
 
+## Maps the teacher's dialogue to possible player responses.
 ## Maps the teacher's dialogue to possible player responses.
 const dialog_to_response: Dictionary[String, Array] = {
 	"Hello, thank you for joining the call. Can you tell me about your previous work experience?": ["My last job was... interesting.", "I'm a quick learner.", "I've been working with cats."],
 	"Interesting. How do you handle stressful situations?": ["I stay calm under pressure.", "I take a deep breath.", "I just purr and it all works out."],
-	"Okay, I'll be right back. Just need to grab a file.": ["Sounds good.", "Okay.", "I'll be here."],
+	"Okay, I'll be right back. Just need to grab a file.": ["Sounds good.", "Okay.", "I'll be here."], # Interruption 1
 	"I'm back. Where were we?": ["Talking about stress.", "You were gone for a bit.", "I'm ready for the next question."],
 	"Great. Let's talk about problem-solving.": ["I like to think outside the box.", "I use logic and reason.", "I let the cat decide."],
-	"Okay, I'll be right back again. Don't go anywhere.": ["Sounds good.", "Okay.", "I'll be here."],
+	"Okay, I'll be right back again. Don't go anywhere.": ["Sounds good.", "Okay.", "I'll be here."], # Interruption 2
 	"I'm back again. One more question.": ["Ready when you are.", "Just a little more.", "I'm still here."],
+	
+	# --- START OF FIX ---
+	# Add a new question and a third interruption here.
+	"Tell me about a time you worked on a team.": ["I'm a great collaborator.", "I prefer to lead.", "My cat was the project manager."],
+	"Fascinating. One moment, my dog is barking. Be right back.": ["No problem.", "I understand.", "I'll wait."], # Interruption 3
+	"Alright, sorry about that. Now, for my final question.": ["I'm ready.", "Let's finish this.", "Was it a big dog?"],
+	# --- END OF FIX ---
+
 	"Okay, that's everything for now. We'll be in touch!": ["Thank you!", "Goodbye!", "Looking forward to it!"]
 }
 
@@ -92,11 +100,35 @@ func _on_turn_around_button_down() -> void:
 	if room_view_button_ready:
 		if room_view.visible:
 			# Player is in room view, so turn back to interview
+			print("Turning from Room View to Computer View")
 			room_view.visible = false
 			computer_view.visible = true
 			
+			# Check if the professor is back, then continue the dialogue
+			if hochberg_is_back:
+				print("Professor is back, continuing dialogue.")
+				hochberg.play("default")
+				
+				# --- START OF FIX ---
+				# This logic is moved from _on_task_timer_timeout to prevent
+				# calling that function and incrementing the game cycle twice.
+				if task_state == TaskState.SUCCESS:
+					print("Task was a success, displaying next dialogue.")
+					display_next_dialog()
+				else:
+					print("Task failed, displaying failure dialogue.")
+					dialog_bubble.visible = true
+					dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
+					dialog_bubble.but1.visible = true
+					dialog_bubble.but2.visible = true
+					dialog_bubble.but3.visible = true
+				# --- END OF FIX ---
+				
+				hochberg_is_back = false
+			
 		else:
 			# Player is in interview view, so turn to room
+			print("Turning from Computer View to Room View")
 			room_view.visible = true
 			computer_view.visible = false
 			
@@ -104,8 +136,8 @@ func _on_turn_around_button_down() -> void:
 			#if room_view:
 				#room_view.show_cat_event()
 				
-		dialog_bubble.visible = false
 		turn_around.visible = true
+
 
 func _on_room_tasks_completed(success: bool):
 	print("TASK COMPLETED")
@@ -120,7 +152,6 @@ func _on_room_tasks_completed(success: bool):
 		print("Task failed! Score is now: " + str(score))
 
 func _on_task_timer_timeout():
-	# This function handles the professor's return, but does not force a view change
 	print("Timer ran out, professor is back!")
 	
 	# The professor is back, regardless of the view
@@ -134,8 +165,10 @@ func _on_task_timer_timeout():
 		if computer_view.visible:
 			# If the player is on the computer view, the dialogue appears automatically
 			if task_state == TaskState.SUCCESS:
+				print("Task was a success, displaying next dialogue.")
 				display_next_dialog()
 			else:
+				print("Task failed, displaying failure dialogue.")
 				dialog_bubble.visible = true
 				dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
 				dialog_bubble.but1.visible = true
@@ -143,9 +176,10 @@ func _on_task_timer_timeout():
 				dialog_bubble.but3.visible = true
 		else:
 			# Player is still in the room, show "ahem!" to prompt a manual return
+			print("Player is in room view, displaying Ahem!")
 			dialog_bubble.visible = true
 			dialog_bubble.set_dialog("Ahem!", [])
-
+			hochberg_is_back = true
 
 func end_game():
 	if dialog_bubble:
