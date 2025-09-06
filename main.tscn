@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=13 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://chgsgti82mqd2" path="res://Assets/room/window.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://cv5i8o4sg3nvx" path="res://Assets/room/outlet.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://b2wt1ttugf3il" path="res://Assets/room/door.png" id="8_efxa6"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
 width = 128
@@ -56,16 +57,25 @@ texture = ExtResource("3_h2yge")
 [node name="WashingMachine" type="Node2D" parent="RoomView"]
 position = Vector2(-673, 124)
 
-[node name="Door" type="TextureButton" parent="RoomView/WashingMachine"]
+[node name="Machine" type="TextureButton" parent="RoomView/WashingMachine"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(2.00765, 2.33872)
 texture_normal = ExtResource("5_7mycd")
 
-[node name="Cat" type="TextureButton" parent="RoomView/WashingMachine"]
+[node name="MachineCat" type="TextureButton" parent="RoomView/WashingMachine"]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 109.0
+offset_top = 121.0
+offset_right = 237.0
+offset_bottom = 377.0
+texture_normal = ExtResource("5_kek77")
+
+[node name="machine_door" type="TextureButton" parent="RoomView/WashingMachine"]
+offset_top = 25.0
+offset_right = 256.0
+offset_bottom = 281.0
+texture_normal = ExtResource("8_efxa6")
 
 [node name="Window" type="Node2D" parent="RoomView"]
 position = Vector2(597, -358)
@@ -93,7 +103,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("7_5vw27")
 
-[node name="Cat" type="TextureButton" parent="RoomView/Outlet"]
+[node name="OutletCat" type="TextureButton" parent="RoomView/Outlet"]
+visible = false
 offset_left = -416.0
 offset_top = -16.0
 offset_right = -288.0
@@ -191,8 +202,10 @@ text = "3
 [connection signal="button_down" from="ComputerView/HBoxContainer/LeaveCall" to="." method="_on_leave_call_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/CameraButton" to="." method="_on_camera_button_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/ShareScreen" to="." method="_on_share_screen_button_down"]
+[connection signal="button_down" from="RoomView/WashingMachine/MachineCat" to="RoomView" method="_on_machine_cat_button_down"]
+[connection signal="button_down" from="RoomView/WashingMachine/machine_door" to="RoomView" method="_on_machine_door_button_down"]
 [connection signal="button_down" from="RoomView/Window/WindowCat" to="RoomView" method="_on_window_cat_button_down"]
-[connection signal="button_down" from="RoomView/Outlet/Cat" to="RoomView" method="_on_outlet_cat_button_down"]
+[connection signal="button_down" from="RoomView/Outlet/OutletCat" to="RoomView" method="_on_outlet_cat_button_down"]
 [connection signal="button_down" from="TurnAround" to="." method="_on_turn_around_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
 [connection signal="button_down" from="Dialog/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_button_down"]
