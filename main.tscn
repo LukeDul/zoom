@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=19 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
@@ -6,13 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://c3tt5mmmcmuht" path="res://Assets/room/background.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://cyfr87o7pl1ka" path="res://room_view.gd" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bhuq4pdlsuklu" path="res://Assets/computer/face.png" id="4_dg77c"]
-[ext_resource type="Texture2D" uid="uid://ea454mqj0bt" path="res://Assets/room/washingmachine.png" id="5_7mycd"]
-[ext_resource type="Texture2D" uid="uid://b8xcs0w7k17je" path="res://Assets/room/cat.png" id="5_kek77"]
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
-[ext_resource type="Texture2D" uid="uid://chgsgti82mqd2" path="res://Assets/room/window.png" id="6_272bh"]
-[ext_resource type="Texture2D" uid="uid://cv5i8o4sg3nvx" path="res://Assets/room/outlet.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://dxamph3nk3xbi" path="res://backgroundobjects/IMG_8161.png" id="7_vivmo"]
 [ext_resource type="Texture2D" uid="uid://b2wt1ttugf3il" path="res://Assets/room/door.png" id="8_efxa6"]
 [ext_resource type="Texture2D" uid="uid://bbd4t6wx1gvja" path="res://cat/spinny.png" id="8_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://clggldfmvli1w" path="res://backgroundobjects/IMG_8163.png" id="10_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://cjh483xgsqgxj" path="res://cat/scratch.png" id="11_yaehf"]
+[ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://backgroundobjects/IMG_8159.png" id="12_vivmo"]
+[ext_resource type="Texture2D" uid="uid://bbvcsp3i2vd13" path="res://cat/poke.png" id="13_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://dl6wekmg5p32" path="res://cat/idle.png" id="13_w48qg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycdy4"]
@@ -79,10 +80,12 @@ texture = ExtResource("3_h2yge")
 position = Vector2(-673, 124)
 
 [node name="Machine" type="TextureButton" parent="RoomView/WashingMachine"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(2.00765, 2.33872)
-texture_normal = ExtResource("5_7mycd")
+offset_left = -163.0
+offset_top = -306.0
+offset_right = 1885.0
+offset_bottom = 1742.0
+scale = Vector2(0.3, 0.349)
+texture_normal = ExtResource("7_vivmo")
 
 [node name="Sprite2D" type="Sprite2D" parent="RoomView/WashingMachine"]
 position = Vector2(135, 151)
@@ -105,6 +108,7 @@ size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="machine_door" type="TextureButton" parent="RoomView/WashingMachine"]
+visible = false
 offset_top = 25.0
 offset_right = 256.0
 offset_bottom = 281.0
@@ -118,15 +122,17 @@ offset_left = -263.0
 offset_top = -109.0
 offset_right = -7.0
 offset_bottom = 403.0
-texture_normal = ExtResource("6_272bh")
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_2cqfq")
 
 [node name="WindowCat" type="TextureButton" parent="RoomView/Window"]
 visible = false
-offset_left = -240.0
-offset_top = -76.0
-offset_right = -112.0
-offset_bottom = 180.0
-texture_normal = ExtResource("5_kek77")
+offset_left = -203.0
+offset_top = -120.0
+offset_right = 1845.0
+offset_bottom = 1928.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("11_yaehf")
 
 [node name="Outlet" type="Node2D" parent="RoomView"]
 position = Vector2(198, 245)
@@ -134,21 +140,23 @@ position = Vector2(198, 245)
 [node name="OutletButton" type="TextureButton" parent="RoomView/Outlet"]
 offset_right = 40.0
 offset_bottom = 40.0
-texture_normal = ExtResource("7_5vw27")
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("12_vivmo")
 
 [node name="OutletCat" type="TextureButton" parent="RoomView/Outlet"]
 visible = false
-offset_left = -416.0
-offset_top = -16.0
-offset_right = -288.0
-offset_bottom = 240.0
-texture_normal = ExtResource("5_kek77")
+offset_left = -551.0
+offset_top = -274.0
+offset_right = 1497.0
+offset_bottom = 1774.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("13_2cqfq")
 
 [node name="IdleCat" type="TextureButton" parent="RoomView"]
-offset_left = -787.0
-offset_top = -343.0
-offset_right = 1261.0
-offset_bottom = 1705.0
+offset_left = -713.0
+offset_top = -313.0
+offset_right = 1335.0
+offset_bottom = 1735.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("13_w48qg")
 
@@ -160,6 +168,7 @@ offset_bottom = 539.0
 texture_normal = ExtResource("2_0xm2m")
 
 [node name="Dialog" type="Node2D" parent="."]
+visible = false
 position = Vector2(449, 79)
 script = ExtResource("5_lquwl")
 

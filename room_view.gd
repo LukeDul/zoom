@@ -14,7 +14,7 @@ func call_later(seconds: float, callback_func: Callable) -> SceneTreeTimer:
 	timer.timeout.connect(callback_func)
 	return timer
 
-var cur_cat: Node2D
+var cur_cat
 
 var cat_state = CatStates.IDLE:
 	set(v):
@@ -30,11 +30,19 @@ var cat_state = CatStates.IDLE:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	cat_state = CatStates.WASHING_MACHINE
+	cat_state = CatStates.OUTLET
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if cat_state == CatStates.IDLE:
+		if Input.is_action_just_pressed("debug1"):
+			cat_state = CatStates.CURTAINS
+		elif Input.is_action_just_pressed("debug2"):
+			cat_state = CatStates.WASHING_MACHINE
+		elif Input.is_action_just_pressed("debug3"):
+			cat_state = CatStates.OUTLET
+	
 	match(cat_state):
 		CatStates.IDLE: pass
 		CatStates.CURTAINS: pass
