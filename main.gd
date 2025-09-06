@@ -9,6 +9,9 @@ extends Node2D
 @onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
+enum TaskState {UNRESOLVED, SUCCESS, FAILURE}
+
+const TASK_TIMER_DURATION = 15.0
 
 ## Maps the teacher's dialogue to possible player responses.
 const dialog_to_response: Dictionary[String, Array] = {
@@ -25,9 +28,11 @@ const dialog_to_response: Dictionary[String, Array] = {
 var dialog_list: Array[String] = dialog_to_response.keys()
 var cur_dialog_id = 0
 var room_view_button_ready = false
+var hochberg_is_back = false
 
 var score = 100
 var game_cycle = 0
+var task_state = TaskState.UNRESOLVED
 const MAX_CYCLES = 3
 
 # A signal to indicate when the room view tasks are done, with a result.
@@ -59,7 +64,6 @@ func display_next_dialog()->void:
 		_on_leave_call_button_down()
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hide the room view initially
@@ -74,54 +78,78 @@ func _on_leave_call_button_down() -> void:
 	# We also need to hide the dialogue bubble.
 	if dialog_bubble:
 		dialog_bubble.visible = false
-	if turn_around:
-		turn_around.visible = true
+	turn_around.visible = true
 	room_view_button_ready = true
+	task_state = TaskState.UNRESOLVED
 	
 	# The timer and event now start as soon as the teacher leaves.
 	room_view.start_random_event()
-	room_view.set_task_time_limit(15.0)
-	
+	get_tree().create_timer(TASK_TIMER_DURATION).timeout.connect(_on_task_timer_timeout)
+
 
 func _on_turn_around_button_down() -> void:
 	if room_view_button_ready:
-		if room_view:
+		if room_view.visible:
+			# Player is in room view, so turn back to interview
+			room_view.visible = false
+			computer_view.visible = true
+			
+			if hochberg_is_back:
+				dialog_bubble.visible = true
+				hochberg.play("default") # Professor comes back to the screen
+				
+				# Check if the game cycle is over
+				game_cycle += 1
+				if game_cycle >= MAX_CYCLES:
+					end_game()
+				else:
+					# Respond based on task state
+					if task_state == TaskState.SUCCESS:
+						display_next_dialog()
+					else:
+						dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
+						dialog_bubble.but1.visible = true
+						dialog_bubble.but2.visible = true
+						dialog_bubble.but3.visible = true
+					# Reset the flag after handling the dialogue
+					hochberg_is_back = false
+			
+		else:
+			# Player is in interview view, so turn to room
 			room_view.visible = true
-		if turn_around:
-			turn_around.visible = false
-		if dialog_bubble:
-			dialog_bubble.visible = false
-		
-		# When the player turns around, they need to see the cat.
-		if room_view:
-			room_view.show_cat_event()
+			computer_view.visible = false
+			
+			# When the player turns around, they need to see the cat.
+			if room_view:
+				room_view.show_cat_event()
+				
+		dialog_bubble.visible = false
+		turn_around.visible = true
 
 func _on_room_tasks_completed(success: bool):
 	print("TASK COMPLETED")
-	room_view.visible = false
-	turn_around.visible = true
-	dialog_bubble.visible = true
-	print("success?", success)
-	if not success:
-		dialog_bubble.visible = true
-		dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
-		dialog_bubble.but1.visible = true
-		dialog_bubble.but2.visible = true
-		dialog_bubble.but3.visible = true
-		score -= 15
-		print("Task failed! Score is now: " + str(score))
-	else:
-		dialog_bubble.visible = true
+	# Update score and state, but do NOT change the view
+	if success:
 		score += 10
+		task_state = TaskState.SUCCESS
 		print("Task completed successfully! Score is now: " + str(score))
-	
-	# Check if the game cycle is over
-	game_cycle += 1
-	if game_cycle >= MAX_CYCLES:
-		end_game()
 	else:
-		# Go to the next dialogue segment after the failure dialogue.
-		display_next_dialog()
+		score -= 15
+		task_state = TaskState.FAILURE
+		print("Task failed! Score is now: " + str(score))
+
+func _on_task_timer_timeout():
+	# This function handles the professor's return, but does not force a view change
+	print("Timer ran out, professor is back!")
+	
+	# The professor is back, regardless of the view
+	hochberg_is_back = true
+	
+	if room_view.visible:
+		# Player is still in the room, show "ahem!" to prompt a manual return
+		dialog_bubble.visible = true
+		dialog_bubble.set_dialog("Ahem!", [])
+
 
 func end_game():
 	if dialog_bubble:

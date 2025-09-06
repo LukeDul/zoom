@@ -13,22 +13,15 @@ signal room_tasks_completed(success: bool)
 
 var cur_cat
 var cur_tween: Tween
-var time_limit_timer: SceneTreeTimer
-var task_completed = false
 var cat_event_started = false
-
-# Calls the function after the given seconds have passed.
-# Returns the timer. 
-func call_later(seconds: float, callback_func: Callable) -> SceneTreeTimer:
-	var timer = get_tree().create_timer(seconds)
-	timer.timeout.connect(callback_func)
-	return timer
+var task_completed = false # Correctly declared here
 
 var cat_state = CatStates.IDLE:
 	set(v):
 		match(v):
 			CatStates.IDLE: 
-				cur_cat.visible = false 
+				if cur_cat:
+					cur_cat.visible = false 
 				idle_cat.visible = true
 				if cur_tween and is_instance_valid(cur_tween):
 					cur_tween.stop()
@@ -65,7 +58,6 @@ func _process(delta: float) -> void:
 		_: push_error("Unknown Cat State")
 
 func start_random_event():
-	task_completed = false
 	cat_event_started = true
 	
 	var states = [CatStates.CURTAINS, CatStates.WASHING_MACHINE, CatStates.OUTLET]
@@ -82,16 +74,6 @@ func show_cat_event():
 		CatStates.WASHING_MACHINE: start_washing_machine_event()
 		CatStates.OUTLET: start_outlet_event()
 	
-func set_task_time_limit(seconds: float):
-	time_limit_timer = call_later(seconds, on_time_ran_out)
-
-func on_time_ran_out():
-	print("Time ran out! Teacher is coming back.")
-	task_completed = false
-	if cur_tween and is_instance_valid(cur_tween):
-		cur_tween.stop()
-	cat_state = CatStates.IDLE
-	
 func start_curtain_event()->void:
 	print("cat is ripping curtain!! stop him")
 	Global.play("tear")
@@ -105,11 +87,9 @@ func start_curtain_event()->void:
 		cur_tween.finished.connect(end_curtain_event)
 
 func end_curtain_event()->void:
-	if is_instance_valid(time_limit_timer):
-		print("cat tore up curtain")
-		cat_state = CatStates.IDLE
-	else:
-		pass
+	print("cat tore up curtain")
+	cat_state = CatStates.IDLE
+	
 
 func _on_window_cat_button_down() -> void:
 	print("you grabbed the cat")
@@ -132,11 +112,9 @@ func start_outlet_event()->void:
 		cur_tween.finished.connect(end_outlet_event)
 
 func end_outlet_event()->void:
-	if is_instance_valid(time_limit_timer):
-		print("cat electricuted himself")
-		cat_state = CatStates.IDLE
-	else:
-		pass
+	print("cat electricuted himself")
+	cat_state = CatStates.IDLE
+	
 
 func _on_outlet_cat_button_down() -> void:
 	print("you grabbed the cat")
@@ -156,11 +134,9 @@ func start_washing_machine_event()->void:
 		cur_tween.finished.connect(end_washing_machine_event)
 
 func end_washing_machine_event()->void:
-	if is_instance_valid(time_limit_timer):
-		print("cat drowned himself")
-		cat_state = CatStates.IDLE
-	else:
-		pass
+	print("cat drowned himself")
+	cat_state = CatStates.IDLE
+
 
 func _on_machine_cat_button_down() -> void:
 	print("you grabbed the cat from the washing machine")
