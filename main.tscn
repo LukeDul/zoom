@@ -1,16 +1,34 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=18 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://c3tt5mmmcmuht" path="res://Assets/room/background.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://cyfr87o7pl1ka" path="res://room_view.gd" id="4_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bhuq4pdlsuklu" path="res://Assets/computer/face.png" id="4_dg77c"]
 [ext_resource type="Texture2D" uid="uid://ea454mqj0bt" path="res://Assets/room/washingmachine.png" id="5_7mycd"]
 [ext_resource type="Texture2D" uid="uid://b8xcs0w7k17je" path="res://Assets/room/cat.png" id="5_kek77"]
 [ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://chgsgti82mqd2" path="res://Assets/room/window.png" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://cv5i8o4sg3nvx" path="res://Assets/room/outlet.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://b2wt1ttugf3il" path="res://Assets/room/door.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bbd4t6wx1gvja" path="res://cat/spinny.png" id="8_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://dl6wekmg5p32" path="res://cat/idle.png" id="13_w48qg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdy4"]
+atlas = ExtResource("4_dg77c")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w48qg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdy4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
 width = 128
@@ -48,6 +66,9 @@ texture_normal = ExtResource("2_0xm2m")
 layout_mode = 2
 texture_normal = ExtResource("2_0xm2m")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ComputerView"]
+sprite_frames = SubResource("SpriteFrames_w48qg")
+
 [node name="RoomView" type="Node2D" parent="."]
 script = ExtResource("4_4c57u")
 
@@ -63,13 +84,25 @@ offset_bottom = 40.0
 scale = Vector2(2.00765, 2.33872)
 texture_normal = ExtResource("5_7mycd")
 
-[node name="MachineCat" type="TextureButton" parent="RoomView/WashingMachine"]
-visible = false
-offset_left = 109.0
-offset_top = 121.0
-offset_right = 237.0
-offset_bottom = 377.0
-texture_normal = ExtResource("5_kek77")
+[node name="Sprite2D" type="Sprite2D" parent="RoomView/WashingMachine"]
+position = Vector2(135, 151)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_ycdy4")
+
+[node name="MachineCat" type="TextureButton" parent="RoomView/WashingMachine/Sprite2D"]
+anchors_preset = -1
+anchor_left = -0.0603841
+anchor_top = -0.0520833
+anchor_right = 0.00846356
+anchor_bottom = -0.020345
+offset_left = -313.333
+offset_top = -103.333
+offset_right = 1734.67
+offset_bottom = 1944.67
+scale = Vector2(0.365597, 0.381965)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="machine_door" type="TextureButton" parent="RoomView/WashingMachine"]
 offset_top = 25.0
@@ -114,9 +147,10 @@ texture_normal = ExtResource("5_kek77")
 [node name="IdleCat" type="TextureButton" parent="RoomView"]
 offset_left = -787.0
 offset_top = -343.0
-offset_right = -659.0
-offset_bottom = -87.0
-texture_normal = ExtResource("5_kek77")
+offset_right = 1261.0
+offset_bottom = 1705.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("13_w48qg")
 
 [node name="TurnAround" type="TextureButton" parent="."]
 offset_left = 823.0
@@ -202,7 +236,7 @@ text = "3
 [connection signal="button_down" from="ComputerView/HBoxContainer/LeaveCall" to="." method="_on_leave_call_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/CameraButton" to="." method="_on_camera_button_button_down"]
 [connection signal="button_down" from="ComputerView/HBoxContainer/ShareScreen" to="." method="_on_share_screen_button_down"]
-[connection signal="button_down" from="RoomView/WashingMachine/MachineCat" to="RoomView" method="_on_machine_cat_button_down"]
+[connection signal="button_down" from="RoomView/WashingMachine/Sprite2D/MachineCat" to="RoomView" method="_on_machine_cat_button_down"]
 [connection signal="button_down" from="RoomView/WashingMachine/machine_door" to="RoomView" method="_on_machine_door_button_down"]
 [connection signal="button_down" from="RoomView/Window/WindowCat" to="RoomView" method="_on_window_cat_button_down"]
 [connection signal="button_down" from="RoomView/Outlet/OutletCat" to="RoomView" method="_on_outlet_cat_button_down"]

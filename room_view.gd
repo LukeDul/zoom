@@ -14,7 +14,7 @@ func call_later(seconds: float, callback_func: Callable) -> SceneTreeTimer:
 	timer.timeout.connect(callback_func)
 	return timer
 
-var cur_cat: TextureButton
+var cur_cat: Node2D
 
 var cat_state = CatStates.IDLE:
 	set(v):
@@ -88,12 +88,12 @@ func _on_outlet_cat_button_down() -> void:
 ## WASHING MACHINE EVENT *********************************************************************************
 func start_washing_machine_event()->void:
 	print("cat is about to drown himself!! stop him")
-	cur_cat = washing_machine.get_node("MachineCat")
+	cur_cat = washing_machine.get_node("Sprite2D")
 	cur_cat.visible = true
 	idle_cat.visible = false
 	
 	var tween := create_tween()
-	tween.tween_property(cur_cat, "rotation", 180, 5) 
+	tween.tween_property(cur_cat, "rotation", 5, 5) 
 	tween.finished.connect(end_washing_machine_event)
 
 func end_washing_machine_event()->void:
