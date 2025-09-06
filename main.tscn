@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=32 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
@@ -22,15 +22,15 @@
 [ext_resource type="Texture2D" uid="uid://b6s7qf28y4tyb" path="res://Assets/room/backgroundobjects/burnt_outlet.png" id="17_82xsv"]
 [ext_resource type="Texture2D" uid="uid://c1o0jy8f2g2fx" path="res://Assets/room/backgroundobjects/outlet.png" id="18_getpj"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("7_82xsv")
+region = Rect2(0, 0, 2048, 2048)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryguw"]
 atlas = ExtResource("6_cegan")
 region = Rect2(0, 0, 2048, 2048)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
-atlas = ExtResource("7_82xsv")
-region = Rect2(0, 0, 2048, 2048)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1u8w0"]
 atlas = ExtResource("8_getpj")
 region = Rect2(0, 0, 2048, 2048)
 
@@ -38,16 +38,26 @@ region = Rect2(0, 0, 2048, 2048)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ryguw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d13ii")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1u8w0")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}],
+"loop": true,
+"name": &"gone",
 "speed": 5.0
 }]
 
@@ -104,10 +114,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
-width = 128
-height = 128
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
@@ -174,6 +180,7 @@ scale = Vector2(0.3, 0.349)
 texture_normal = ExtResource("7_vivmo")
 
 [node name="Sprite2D" type="Sprite2D" parent="RoomView/WashingMachine"]
+visible = false
 position = Vector2(135, 151)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("8_ycdy4")
@@ -209,6 +216,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_qsp4k")
 
 [node name="WindowCat" type="TextureButton" parent="RoomView/Window"]
+visible = false
 offset_left = -242.0
 offset_top = -222.0
 offset_right = 1806.0
@@ -220,6 +228,7 @@ texture_normal = ExtResource("11_yaehf")
 position = Vector2(198, 245)
 
 [node name="OutletCat" type="TextureButton" parent="RoomView/Outlet"]
+visible = false
 offset_left = -551.0
 offset_top = -274.0
 offset_right = 1497.0
@@ -247,83 +256,61 @@ offset_bottom = 539.0
 texture_normal = ExtResource("2_0xm2m")
 
 [node name="Dialog" type="Node2D" parent="."]
-visible = false
-position = Vector2(456, -219)
+position = Vector2(-667, 77)
 script = ExtResource("5_lquwl")
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
 offset_left = 114.0
 offset_top = -221.0
-offset_right = 505.0
+offset_right = 1165.0
 offset_bottom = 182.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="Dialog/ColorRect"]
 layout_mode = 0
-offset_right = 390.0
+offset_right = 1050.0
 offset_bottom = 240.0
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "words words words"
 autowrap_mode = 2
 clip_text = true
 
-[node name="Label2" type="Label" parent="Dialog/ColorRect"]
+[node name="TextOptions" type="VBoxContainer" parent="Dialog/ColorRect"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 207.0
-offset_right = 384.0
-offset_bottom = 400.0
-theme_override_font_sizes/font_size = 50
-text = "default"
-autowrap_mode = 2
+offset_top = 180.0
+offset_right = 1049.0
+offset_bottom = 235.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Dialog"]
-offset_left = 113.0
-offset_top = 183.0
-offset_right = 505.0
-offset_bottom = 311.0
-
-[node name="TextureButton" type="TextureButton" parent="Dialog/HBoxContainer"]
+[node name="label1" type="Label" parent="Dialog/ColorRect/TextOptions"]
 layout_mode = 2
-texture_normal = SubResource("NoiseTexture2D_lquwl")
-texture_disabled = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 40
+text = "1. "
 
-[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton"]
+[node name="option1" type="TextureButton" parent="Dialog/ColorRect/TextOptions/label1"]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 48.0
-offset_right = 98.0
-offset_bottom = 97.0
-text = "1
+offset_right = 1050.0
+offset_bottom = 60.0
+
+[node name="label2" type="Label" parent="Dialog/ColorRect/TextOptions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "2."
+
+[node name="option2" type="TextureButton" parent="Dialog/ColorRect/TextOptions/label2"]
+layout_mode = 0
+offset_right = 1050.0
+offset_bottom = 60.0
+
+[node name="label3" type="Label" parent="Dialog/ColorRect/TextOptions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "3.
 "
 
-[node name="TextureButton2" type="TextureButton" parent="Dialog/HBoxContainer"]
-layout_mode = 2
-texture_normal = SubResource("NoiseTexture2D_lquwl")
-texture_disabled = ExtResource("2_0xm2m")
-
-[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton2"]
+[node name="option3" type="TextureButton" parent="Dialog/ColorRect/TextOptions/label3"]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 48.0
-offset_right = 98.0
-offset_bottom = 97.0
-text = "2
-"
-
-[node name="TextureButton3" type="TextureButton" parent="Dialog/HBoxContainer"]
-layout_mode = 2
-texture_normal = SubResource("NoiseTexture2D_lquwl")
-texture_disabled = ExtResource("2_0xm2m")
-
-[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton3"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 48.0
-offset_right = 98.0
-offset_bottom = 97.0
-text = "3
-"
+offset_right = 1050.0
+offset_bottom = 60.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -336,6 +323,6 @@ text = "3
 [connection signal="button_down" from="RoomView/Window/WindowCat" to="RoomView" method="_on_window_cat_button_down"]
 [connection signal="button_down" from="RoomView/Outlet/OutletCat" to="RoomView" method="_on_outlet_cat_button_down"]
 [connection signal="button_down" from="TurnAround" to="." method="_on_turn_around_button_down"]
-[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
-[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_button_down"]
-[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton3" to="." method="_on_texture_button_3_button_down"]
+[connection signal="button_down" from="Dialog/ColorRect/TextOptions/label1/option1" to="." method="_on_option_1_button_down"]
+[connection signal="button_down" from="Dialog/ColorRect/TextOptions/label2/option2" to="." method="_on_option_2_button_down"]
+[connection signal="button_down" from="Dialog/ColorRect/TextOptions/label3/option3" to="." method="_on_option_3_button_down"]

@@ -28,8 +28,7 @@ var cat_state = CatStates.IDLE:
 	set(v):
 		match(v):
 			CatStates.IDLE: 
-				if cur_cat:
-					cur_cat.visible = false 
+				cur_cat.visible = false 
 				idle_cat.visible = true
 				if cur_tween and is_instance_valid(cur_tween):
 					cur_tween.stop()
@@ -64,7 +63,7 @@ func _process(delta: float) -> void:
 		CatStates.WASHING_MACHINE: pass
 		CatStates.OUTLET: pass
 		_: push_error("Unknown Cat State")
-		
+
 func start_random_event():
 	task_completed = false
 	cat_event_started = true
@@ -75,6 +74,7 @@ func start_random_event():
 	cat_state = random_state
 
 func show_cat_event():
+	pass
 	if not cat_event_started: return
 	
 	match(cat_state):
@@ -101,7 +101,7 @@ func start_curtain_event()->void:
 	
 	cur_tween = create_tween()
 	if cur_cat:
-		cur_tween.tween_property(cur_cat, "position", Vector2(cur_cat.position.x, cur_cat.position.y + 300), 1.0) 
+		cur_tween.tween_property(cur_cat, "position", Vector2(cur_cat.position.x, cur_cat.position.y + 300), 3.61) 
 		cur_tween.finished.connect(end_curtain_event)
 
 func end_curtain_event()->void:

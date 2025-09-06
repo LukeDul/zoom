@@ -4,7 +4,8 @@ extends Node2D
 @onready var turn_around = $TurnAround
 @onready var room_view: Node2D = $RoomView
 @onready var dialog_bubble: DialogBubble = $Dialog
-
+@onready var computer_view: Node2D = $ComputerView
+@onready var hochberg: AnimatedSprite2D = $ComputerView/Hochberg
 @onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 enum CatStates {IDLE, CURTAINS, WASHING_MACHINE, OUTLET}
@@ -57,28 +58,18 @@ func display_next_dialog()->void:
 		await get_tree().create_timer(1.5).timeout
 		_on_leave_call_button_down()
 
-# This is a better place to handle the button logic.
-func _on_texture_button_button_down() -> void:
-	print("option 1")
-	display_next_dialog()
 
-func _on_texture_button_2_button_down() -> void:
-	print("option 2")
-	display_next_dialog()
-
-func _on_texture_button_3_button_down() -> void:
-	print("option 3")
-	display_next_dialog()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hide the room view initially
 	room_view.visible = false
 	turn_around.visible = false
-	
+	room_view.room_tasks_completed.connect(_on_room_tasks_completed)
 	display_next_dialog()
 
 func _on_leave_call_button_down() -> void:
+	hochberg.play("gone")
 	# Teacher leaves, show the turn around button.
 	# We also need to hide the dialogue bubble.
 	if dialog_bubble:
@@ -88,14 +79,9 @@ func _on_leave_call_button_down() -> void:
 	room_view_button_ready = true
 	
 	# The timer and event now start as soon as the teacher leaves.
-	if room_view:
-		room_view.start_random_event()
-		room_view.set_task_time_limit(15.0)
+	room_view.start_random_event()
+	room_view.set_task_time_limit(15.0)
 	
-	# Connect to the signal from the room_view manager
-	# This is now done here so we can receive the signal regardless of whether the player turns around.
-	if room_view:
-		room_view.room_tasks_completed.connect(_on_room_tasks_completed)
 
 func _on_turn_around_button_down() -> void:
 	if room_view_button_ready:
@@ -111,25 +97,21 @@ func _on_turn_around_button_down() -> void:
 			room_view.show_cat_event()
 
 func _on_room_tasks_completed(success: bool):
-	if room_view:
-		room_view.visible = false
-	if turn_around:
-		turn_around.visible = true
-	if dialog_bubble:
-		dialog_bubble.visible = true
-	
-	# New logic to handle failure dialogue
+	print("TASK COMPLETED")
+	room_view.visible = false
+	turn_around.visible = true
+	dialog_bubble.visible = true
+	print("success?", success)
 	if not success:
-		if dialog_bubble:
-			dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
-			dialog_bubble.but1.visible = true
-			dialog_bubble.but2.visible = true
-			dialog_bubble.but3.visible = true
+		dialog_bubble.visible = true
+		dialog_bubble.set_dialog("WHAT THE HECK IS GOING ON HERE?", ["Oh no!", "I'm sorry.", "The cat did it!"])
+		dialog_bubble.but1.visible = true
+		dialog_bubble.but2.visible = true
+		dialog_bubble.but3.visible = true
 		score -= 15
 		print("Task failed! Score is now: " + str(score))
 	else:
-		if dialog_bubble:
-			dialog_bubble.visible = true
+		dialog_bubble.visible = true
 		score += 10
 		print("Task completed successfully! Score is now: " + str(score))
 	
@@ -149,8 +131,21 @@ func end_game():
 		dialog_bubble.but1.disabled = true
 		dialog_bubble.but2.disabled = true
 		dialog_bubble.but3.disabled = true
+
 func _on_camera_button_button_down() -> void:
 	print("disabled/enabled camera")
 
 func _on_share_screen_button_down() -> void:
 	print("shared screen")
+
+func _on_option_3_button_down() -> void:
+	print("option 3")
+	display_next_dialog()
+
+func _on_option_2_button_down() -> void:
+	print("option 2")
+	display_next_dialog()
+
+func _on_option_1_button_down() -> void:
+	print("option 1")
+	display_next_dialog()
