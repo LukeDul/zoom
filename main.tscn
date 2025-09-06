@@ -1,12 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvirkprp27esk"]
+[gd_scene load_steps=11 format=3 uid="uid://dvirkprp27esk"]
 
 [ext_resource type="Script" uid="uid://c51w6fej3xoj8" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cbr35jw1ini0n" path="res://Assets/computer/background.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://byliescwogrja" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://c3tt5mmmcmuht" path="res://Assets/room/background.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://ea454mqj0bt" path="res://Assets/room/washingmachine.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b8xcs0w7k17je" path="res://Assets/room/cat.png" id="5_kek77"]
+[ext_resource type="Script" uid="uid://dsrh1ibw1vpv1" path="res://dialog.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://chgsgti82mqd2" path="res://Assets/room/window.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://cv5i8o4sg3nvx" path="res://Assets/room/outlet.png" id="7_5vw27"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+width = 128
+height = 128
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="ComputerView" type="Node2D" parent="."]
 
@@ -40,7 +51,39 @@ texture_normal = ExtResource("2_0xm2m")
 [node name="BackgroundSprite" type="Sprite2D" parent="RoomView"]
 texture = ExtResource("3_h2yge")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="WashingMachine" type="Node2D" parent="RoomView"]
+position = Vector2(-673, 124)
+
+[node name="TextureButton" type="TextureButton" parent="RoomView/WashingMachine"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.00765, 2.33872)
+texture_normal = ExtResource("5_7mycd")
+
+[node name="Window" type="Node2D" parent="RoomView"]
+position = Vector2(597, -358)
+
+[node name="TextureButton" type="TextureButton" parent="RoomView/Window"]
+offset_left = -263.0
+offset_top = -109.0
+offset_right = -7.0
+offset_bottom = 403.0
+texture_normal = ExtResource("6_272bh")
+
+[node name="Outlet" type="Node2D" parent="RoomView"]
+position = Vector2(198, 245)
+
+[node name="TextureButton" type="TextureButton" parent="RoomView/Outlet"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("7_5vw27")
+
+[node name="Cat" type="TextureButton" parent="RoomView"]
+offset_left = -272.0
+offset_top = 111.0
+offset_right = -144.0
+offset_bottom = 367.0
+texture_normal = ExtResource("5_kek77")
 
 [node name="TurnAround" type="TextureButton" parent="."]
 offset_left = 823.0
@@ -49,5 +92,84 @@ offset_right = 951.0
 offset_bottom = 539.0
 texture_normal = ExtResource("2_0xm2m")
 
+[node name="Dialog" type="Node2D" parent="."]
+position = Vector2(449, 79)
+script = ExtResource("5_lquwl")
+
+[node name="ColorRect" type="ColorRect" parent="Dialog"]
+offset_left = 114.0
+offset_top = -221.0
+offset_right = 505.0
+offset_bottom = 182.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Dialog/ColorRect"]
+offset_right = 390.0
+offset_bottom = 240.0
+theme_override_font_sizes/font_size = 50
+text = "words words words"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Label2" type="Label" parent="Dialog/ColorRect"]
+offset_left = 4.0
+offset_top = 207.0
+offset_right = 384.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 50
+text = "default"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog"]
+offset_left = 113.0
+offset_top = 183.0
+offset_right = 505.0
+offset_bottom = 311.0
+
+[node name="TextureButton" type="TextureButton" parent="Dialog/HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("NoiseTexture2D_lquwl")
+texture_disabled = ExtResource("2_0xm2m")
+
+[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton"]
+offset_left = 58.0
+offset_top = 48.0
+offset_right = 98.0
+offset_bottom = 97.0
+text = "1
+"
+
+[node name="TextureButton2" type="TextureButton" parent="Dialog/HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("NoiseTexture2D_lquwl")
+texture_disabled = ExtResource("2_0xm2m")
+
+[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton2"]
+offset_left = 58.0
+offset_top = 48.0
+offset_right = 98.0
+offset_bottom = 97.0
+text = "2
+"
+
+[node name="TextureButton3" type="TextureButton" parent="Dialog/HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("NoiseTexture2D_lquwl")
+texture_disabled = ExtResource("2_0xm2m")
+
+[node name="Label" type="Label" parent="Dialog/HBoxContainer/TextureButton3"]
+offset_left = 58.0
+offset_top = 48.0
+offset_right = 98.0
+offset_bottom = 97.0
+text = "3
+"
+
 [connection signal="button_down" from="ComputerView/HBoxContainer/MuteButton" to="." method="_on_mute_button_button_down"]
+[connection signal="button_down" from="ComputerView/HBoxContainer/LeaveCall" to="." method="_on_leave_call_button_down"]
+[connection signal="button_down" from="ComputerView/HBoxContainer/CameraButton" to="." method="_on_camera_button_button_down"]
+[connection signal="button_down" from="ComputerView/HBoxContainer/ShareScreen" to="." method="_on_share_screen_button_down"]
 [connection signal="button_down" from="TurnAround" to="." method="_on_turn_around_button_down"]
+[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_button_down"]
+[connection signal="button_down" from="Dialog/HBoxContainer/TextureButton3" to="." method="_on_texture_button_3_button_down"]
